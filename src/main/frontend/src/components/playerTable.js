@@ -33,7 +33,7 @@ function PlayerTable() {
                         <th>Hits</th>
                         <th>At Bats</th>
                     </tr>
-                    {players.map((player, index) => (
+                    {players.map((player) => (
                         <tr>
                             <td>
                                 {player.name}
