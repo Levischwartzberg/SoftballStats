@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import API from '../utils/API';
-import PlayerTable from './playerTable';
 
 function PlayerInput() {
     const [playerObject, setPlayerObject] = useState({});
@@ -20,31 +19,39 @@ function PlayerInput() {
 
     function handleFormSubmit(event) {
         event.preventDefault();
-        if (playerObject.name) {
+        if (playerObject.firstName) {
             API.addPlayer(
-                {name: playerObject.name,
-                hits: playerObject.hits,
-                atBats: playerObject.atBats
+                {firstName: playerObject.firstName,
+                lastName: playerObject.lastName,
+                height: playerObject.height,
+                weight: playerObject.weight
             }).catch((err) => console.log(err));
         }
     }
 
     return (
         <form>
-            <label htmlFor="name">
-                <input onChange={handleChange} placeholder="Name" type="text" name="name" />
+            <label htmlFor="firstName">
+                First Name
+                <input onChange={handleChange} placeholder="First Name" type="text" name="firstName" />
             </label>
-            <label htmlFor="hits">
-                <input onChange={handleChange} placeholder="Hits" type="text" name="hits" />
+            <label htmlFor="lastName">
+                Last Name
+                <input onChange={handleChange} placeholder="Last Name" type="text" name="lastName" />
             </label>
-            <label htmlFor="atBats">
-                <input onChange={handleChange} placeholder="atBats" type="text" name="atBats" />
+            <label htmlFor="weight">
+                Weight
+                <input onChange={handleChange} placeholder="Weight" type="text" name="weight" />
+            </label>
+            <label htmlFor="height">
+                Height
+                <input onChange={handleChange} placeholder="Height" type="text" name="height" />
             </label>
 
             <button
 					className={'btn submit'}
 					type="submit"
-					disabled={!(playerObject.name)}
+					disabled={!(playerObject.firstName)}
 					onClick={handleFormSubmit}
 				>
 					Save

@@ -13,7 +13,7 @@ function PlayerTable() {
             .then((res) => {
                 let playerArray = res.data;
                 playerArray.forEach(element => {
-                    console.log(element.name);
+                    console.log(element.firstName);
                 });
                 return playerArray;
             })
@@ -29,20 +29,24 @@ function PlayerTable() {
             <table>
                 <tbody>
                     <tr>
-                        <th>Player Name</th>
-                        <th>Hits</th>
-                        <th>At Bats</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Height</th>
+                        <th>Weight</th>
                     </tr>
                     {players.map((player) => (
                         <tr>
                             <td>
-                                {player.name}
+                                {player.firstName}
                             </td>
                             <td>
-                                {player.hits}
+                                {player.lastName}
                             </td>
                             <td>
-                                {player.atBats}
+                                {player.height}
+                            </td>
+                            <td>
+                                {player.weight}
                             </td>
                         </tr>
                     ))}
