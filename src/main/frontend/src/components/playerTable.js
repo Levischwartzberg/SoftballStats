@@ -11,17 +11,44 @@ function PlayerTable() {
     function loadPlayers() {
         API.getPlayers()
             .then((res) => {
-                console.log(res);
+                let playerArray = res.data;
+                playerArray.forEach(element => {
+                    console.log(element.name);
+                });
+                return playerArray;
             })
+            .then((playerArray) => setPlayers(playerArray))
             .catch((err) => console.log(err));
     }
 
     return (
-        <header>
+        <div>
             <h1>
-                Test Header
+                Ballplayers
             </h1>
-        </header>
+            <table>
+                <tbody>
+                    <tr>
+                        <th>Player Name</th>
+                        <th>Hits</th>
+                        <th>At Bats</th>
+                    </tr>
+                    {players.map((player, index) => (
+                        <tr>
+                            <td>
+                                {player.name}
+                            </td>
+                            <td>
+                                {player.hits}
+                            </td>
+                            <td>
+                                {player.atBats}
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
     )
 }
 
