@@ -8,7 +8,6 @@ function PlayerGameLog(props) {
     }, [])
 
     function loadGames() {
-        console.log(props.playerId);
         API.getGamesByPlayer(props.playerId)
             .then((res) => {
                 let gameArray = res.data;
@@ -20,20 +19,68 @@ function PlayerGameLog(props) {
     
     return (
         <div>
-            <h1>WHEP</h1>
+            <h3>Game Log</h3>
             <table>
                 <tbody>
                    <tr>
+                       <th>Game</th>
                        <th>AB</th>
                        <th>Hits</th>
+                       <th>1B</th>
+                       <th>2B</th>
+                       <th>3B</th>
+                       <th>HR</th>
+                       <th>BB</th>
+                       <th>R</th>
+                       <th>RBI</th>
+                       <th>AVG</th>
+                       <th>OBP</th>
+                       <th>SLG</th>
+                       <th>OPS</th>
                    </tr>
                    {games.map((game) => (
                         <tr>
+                            <td>
+                                {game.gameId}
+                            </td>
                             <td>
                                 {game.atBats}
                             </td>
                             <td>
                                 {game.hits}
+                            </td>
+                            <td>
+                                {game.singles}
+                            </td>
+                            <td>
+                                {game.doubles}
+                            </td>
+                            <td>
+                                {game.triples}
+                            </td>
+                            <td>
+                                {game.homeruns}
+                            </td>
+                            <td>
+                                {game.walks}
+                            </td>
+                            <td>
+                                {game.runs}
+                            </td>
+                            <td>
+                                {game.rbi}
+                            </td>
+                            <td>
+                                {game.avg}
+                            </td>
+                            <td>
+                                {game.obp}
+                            </td>
+                            <td>
+                                {game.slg}
+                            </td>
+                            <td>
+                                {game.ops}
                             </td>
                         </tr>
                    ))}

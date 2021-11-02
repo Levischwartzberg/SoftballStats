@@ -8,6 +8,10 @@ export default {
     // return fetch('/api/player/');
   },
 
+  getPlayerById: function(playerId) {
+    return axios.get(`/api/player/${playerId}`)
+  },
+
   addPlayer: function(playerData) {
       return axios.post("/api/player/", playerData);
   },

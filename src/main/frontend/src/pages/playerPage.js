@@ -1,4 +1,5 @@
 import PlayerGameLog from "../components/playerGameLog";
+import PlayerBio from "../components/playerBio";
 import { useParams } from 'react-router-dom';
 
 function PlayerPage() {
@@ -6,6 +7,7 @@ function PlayerPage() {
 
     return (
         <div>
+            <PlayerBio playerId={id}></PlayerBio>
             <PlayerGameLog playerId={id}></PlayerGameLog>
         </div>
     )
