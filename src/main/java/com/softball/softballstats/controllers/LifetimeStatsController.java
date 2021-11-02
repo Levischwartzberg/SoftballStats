@@ -2,7 +2,9 @@ package com.softball.softballstats.controllers;
 
 import com.softball.softballstats.domain.Game;
 import com.softball.softballstats.domain.LifetimeStats;
+import com.softball.softballstats.domain.Player;
 import com.softball.softballstats.services.GameService;
+import com.softball.softballstats.services.PlayerService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,16 +18,20 @@ import java.util.List;
 public class LifetimeStatsController {
 
     private GameService gameService;
+    public LifetimeStatsController(GameService gameService, PlayerService playerService) {
+        this.gameService = gameService;
+        this.playerService = playerService;
+    }
 
-    public LifetimeStatsController(GameService gameService) {this.gameService = gameService;}
+    private PlayerService playerService;
 
     @GetMapping("/{id}")
     public LifetimeStats getPlayersLifetimeStats(@PathVariable Integer id) {
-        return calculateLifetimeStats((List<Game>) gameService.findAllGamesByPlayer(id));
+        return calculateLifetimeStats((List<Game>) gameService.findAllGamesByPlayer(id), id);
     }
 
     //region Helper Methods
-    private LifetimeStats calculateLifetimeStats(List<Game> gameList) {
+    private LifetimeStats calculateLifetimeStats(List<Game> gameList, Integer id) {
         LifetimeStats lifetimeStats = new LifetimeStats();
 
         Integer atBats = 0;
@@ -61,6 +67,7 @@ public class LifetimeStatsController {
         lifetimeStats.setObp(calculateOBP(hits, atBats, walks));
         lifetimeStats.setSlg(calculateSLG(singles, doubles, triples, homeruns, atBats));
         lifetimeStats.setOps(calculateOPS(lifetimeStats.getObp(), lifetimeStats.getSlg()));
+        lifetimeStats.setPlayer(playerService.findPlayerById(id).get());
         return lifetimeStats;
     }
 

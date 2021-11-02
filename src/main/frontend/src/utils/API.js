@@ -18,5 +18,9 @@ export default {
 
   getGamesByPlayer: function(playerId) {
     return axios.get(`/api/game/${playerId}`);
+  },
+
+  getLifetimeStatsForPlayer: function(playerId) {
+    return axios.get(`/api/lifetimeStats/${playerId}`);
   }
 }
