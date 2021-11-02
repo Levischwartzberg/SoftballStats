@@ -13,9 +13,6 @@ function PlayerTable() {
         API.getPlayers()
             .then((res) => {
                 let playerArray = res.data;
-                playerArray.forEach(element => {
-                    console.log(element.firstName);
-                });
                 return playerArray;
             })
             .then((playerArray) => setPlayers(playerArray))

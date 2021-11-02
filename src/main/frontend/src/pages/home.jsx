@@ -1,5 +1,5 @@
-import PlayerInput from "../components/playerInput";
-import PlayerTable from "../components/playerTable";
+import PlayerInput from "../components/playerInput.jsx";
+import PlayerTable from "../components/playerTable.jsx";
 
 function Home() {
     return (

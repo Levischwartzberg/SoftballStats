@@ -1,7 +1,7 @@
 import './App.css';
-import Header from './components/header';
-import Home from './pages/home';
-import PlayerPage from './pages/playerPage';
+import Header from './components/header.jsx';
+import Home from './pages/home.jsx';
+import PlayerPage from './pages/playerPage.jsx';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function App() {

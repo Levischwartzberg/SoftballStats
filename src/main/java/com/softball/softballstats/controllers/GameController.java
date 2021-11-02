@@ -21,12 +21,6 @@ public class GameController {
 
     @GetMapping("/{playerId}")
     public Iterable<Game> getAllPlayerGames(@PathVariable Integer playerId) {
-        System.out.println(playerId);
-//        List<Game> gameList = (List<Game>) gameService.findAllGamesByPlayer(playerId);
-//        System.out.println(gameList.size());
-//        for(Game game : gameList) {
-//            System.out.println(game.getAtBats());
-//        }
         return gameService.findAllGamesByPlayer(playerId);
     }
 

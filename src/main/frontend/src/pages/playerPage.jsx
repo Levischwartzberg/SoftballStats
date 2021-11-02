@@ -1,5 +1,5 @@
-import PlayerGameLog from "../components/playerGameLog";
-import PlayerBio from "../components/playerBio";
+import PlayerGameLog from "../components/playerGameLog.jsx";
+import PlayerBio from "../components/playerBio.jsx";
 import { useParams } from 'react-router-dom';
 
 function PlayerPage() {
