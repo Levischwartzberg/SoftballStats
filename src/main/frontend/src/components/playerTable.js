@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import {Link} from 'react-router-dom';
 import API from '../utils/API';
 
 function PlayerTable() {
@@ -37,7 +38,9 @@ function PlayerTable() {
                     {players.map((player) => (
                         <tr>
                             <td>
-                                {player.firstName}
+                                <Link to={`/playerPage/${player.id}`}>
+                                    {player.firstName}
+                                </Link>
                             </td>
                             <td>
                                 {player.lastName}

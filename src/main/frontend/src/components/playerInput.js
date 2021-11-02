@@ -8,14 +8,6 @@ function PlayerInput() {
 		const { name, value } = event.target;
 		setPlayerObject({ ...playerObject, [name]: value });
 	}
-    // function handleHitsChange(event) {
-	// 	const { hits, value } = event.target;
-	// 	setPlayerObject({ ...playerObject, [hits]: value });
-	// }
-    // function handleAbsChange(event) {
-	// 	const { atBats, value } = event.target;
-	// 	setPlayerObject({ ...playerObject, [atBats]: value });
-	// }
 
     function handleFormSubmit(event) {
         event.preventDefault();

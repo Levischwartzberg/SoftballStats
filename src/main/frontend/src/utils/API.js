@@ -10,5 +10,9 @@ export default {
 
   addPlayer: function(playerData) {
       return axios.post("/api/player/", playerData);
+  },
+
+  getGamesByPlayer: function(playerId) {
+    return axios.get(`/api/game/${playerId}`);
   }
 }
