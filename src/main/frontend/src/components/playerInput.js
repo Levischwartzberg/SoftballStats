@@ -51,7 +51,7 @@ function PlayerInput() {
             <button
 					className={'btn submit'}
 					type="submit"
-					disabled={!(playerObject.firstName)}
+					disabled={!(playerObject.firstName) || !(playerObject.lastName)}
 					onClick={handleFormSubmit}
 				>
 					Save

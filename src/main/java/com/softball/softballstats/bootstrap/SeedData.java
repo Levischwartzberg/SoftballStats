@@ -49,7 +49,7 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent>{
         List<Game> gameList2 = new ArrayList<>();
         gameList2.add(game3);
         gameList2.add(game4);
-        player1.setGameList(gameList2);
+        player2.setGameList(gameList2);
 
         playerService.savePlayer(player1);
         playerService.savePlayer(player2);

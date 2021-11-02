@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/game")
 public class GameController {
@@ -17,8 +19,16 @@ public class GameController {
     @GetMapping("/")
     public Iterable<Game> getAllGames() {return gameService.findAllGames();}
 
-    @GetMapping("/{player}")
-    public Iterable<Game> getAllPlayerGames(@PathVariable Integer playerId) {return gameService.findAllGamesByPlayer(playerId);}
+    @GetMapping("/{playerId}")
+    public Iterable<Game> getAllPlayerGames(@PathVariable Integer playerId) {
+        System.out.println(playerId);
+//        List<Game> gameList = (List<Game>) gameService.findAllGamesByPlayer(playerId);
+//        System.out.println(gameList.size());
+//        for(Game game : gameList) {
+//            System.out.println(game.getAtBats());
+//        }
+        return gameService.findAllGamesByPlayer(playerId);
+    }
 
     @PostMapping("/")
     public ResponseEntity<Game> saveGame(@RequestBody Game game) {return new ResponseEntity<Game>(gameService.saveGame(game), HttpStatus.CREATED);}

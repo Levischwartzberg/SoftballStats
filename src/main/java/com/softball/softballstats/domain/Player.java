@@ -1,8 +1,12 @@
 package com.softball.softballstats.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -10,7 +14,8 @@ import java.util.List;
 public class Player {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Integer id;
 
     private String firstName;
@@ -22,7 +27,8 @@ public class Player {
     private String batHand;
     private String throwHand;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="player")
+    @JsonIgnoreProperties("player")
     private List<Game> gameList;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -33,4 +39,11 @@ public class Player {
 
     @ManyToMany
     private List<Position> positionList;
+
+    public void setGameList(List<Game> gameList) {
+        this.gameList = gameList;
+        for (Game game : gameList) {
+            game.setPlayer(this);
+        }
+    }
 }

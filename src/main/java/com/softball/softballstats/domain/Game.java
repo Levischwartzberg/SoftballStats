@@ -1,5 +1,8 @@
 package com.softball.softballstats.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import org.springframework.data.relational.core.sql.In;
 
@@ -10,8 +13,9 @@ import javax.persistence.*;
 public class Game {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "gameId")
+    private Integer gameId;
 
     public Game() {}
 
@@ -45,18 +49,19 @@ public class Game {
     private double slg;
     private double ops;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("gameList")
     private Player player;
 
     //region Helper Methods
     public static double calculateAVG(Integer hits, Integer atBats) {
-        return hits / atBats;
+        return (double) hits / (double) atBats;
     }
     public static double calculateOBP(Integer hits, Integer atBats, Integer walks) {
-        return (hits + walks) / (atBats + walks);
+        return ((double) hits + (double) walks) / ((double) atBats + (double) walks);
     }
     public static double calculateSLG(Integer singles, Integer doubles, Integer triples, Integer homeruns, Integer atBats) {
-        return (1*singles + 2*doubles + 3*triples + 4*homeruns) / atBats;
+        return (1*(double) singles + 2*(double) doubles + 3*(double) triples + 4*(double) homeruns) / (double) atBats;
     }
     public static double calculateOPS(double obp, double slg) {
         return obp + slg;

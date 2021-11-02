@@ -45,6 +45,8 @@ public class PlayerController {
 
     @GetMapping("/{id}")
     public Optional<Player> findPlayerById(@PathVariable Integer id) {
+        Optional<Player> player = playerService.findPlayerById(id);
+        System.out.println(player.get().getGameList().get(0));
         return playerService.findPlayerById(id);
     }
 }
