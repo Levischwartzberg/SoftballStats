@@ -34,6 +34,7 @@ public class LifetimeStatsController {
     private LifetimeStats calculateLifetimeStats(List<Game> gameList, Integer id) {
         LifetimeStats lifetimeStats = new LifetimeStats();
 
+        Integer games = 0;
         Integer atBats = 0;
         Integer hits = 0;
         Integer singles= 0;
@@ -44,6 +45,7 @@ public class LifetimeStatsController {
         Integer runs = 0;
         Integer rbi = 0;
         for(Game game: gameList) {
+            games += 1;
             atBats += game.getAtBats();
             hits += game.getHits();
             singles += game.getSingles();
@@ -54,6 +56,7 @@ public class LifetimeStatsController {
             runs += game.getRuns();
             rbi += game.getRbi();
         }
+        lifetimeStats.setGames(games);
         lifetimeStats.setAtBats(atBats);
         lifetimeStats.setHits(hits);
         lifetimeStats.setSingles(singles);

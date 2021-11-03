@@ -12,6 +12,7 @@ public class LifetimeStats {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    private Integer games;
     private Integer atBats;
     private Integer hits;
     private Integer singles;

@@ -40,7 +40,9 @@ function PlayerTable() {
                                 </Link>
                             </td>
                             <td>
-                                {player.lastName}
+                                <Link to={`/playerPage/${player.id}`}>
+                                    {player.lastName}
+                                </Link>
                             </td>
                             <td>
                                 {player.height}

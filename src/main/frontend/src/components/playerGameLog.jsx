@@ -16,6 +16,10 @@ function PlayerGameLog(props) {
             .then((gameArray) => setGames(gameArray))
             .catch((err) => console.log(err));
     }
+
+    function roundRates(rate) {
+        return (rate > 1) ? Number.parseFloat(rate).toPrecision(4) : Number.parseFloat(rate).toPrecision(3);
+    }
     
     return (
         <div>
@@ -50,10 +54,10 @@ function PlayerGameLog(props) {
                             <td>{game.walks}</td>
                             <td>{game.runs}</td>
                             <td>{game.rbi}</td>
-                            <td>{game.avg}</td>
-                            <td>{game.obp}</td>
-                            <td>{game.slg}</td>
-                            <td>{game.ops}</td>
+                            <td>{roundRates(game.avg)}</td>
+                            <td>{roundRates(game.obp)}</td>
+                            <td>{roundRates(game.slg)}</td>
+                            <td>{roundRates(game.ops)}</td>
                         </tr>
                    ))}
                 </tbody>
