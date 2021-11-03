@@ -2,30 +2,53 @@ package com.softball.softballstats.bootstrap;
 
 import com.softball.softballstats.domain.Game;
 import com.softball.softballstats.domain.Player;
+import com.softball.softballstats.domain.Result;
 import com.softball.softballstats.services.PlayerService;
+import com.softball.softballstats.services.ResultService;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Component
 public class SeedData implements ApplicationListener<ContextRefreshedEvent>{
 
     PlayerService playerService;
+    ResultService resultService;
 
-    public SeedData(PlayerService playerService) {
+    public SeedData(PlayerService playerService, ResultService resultService) {
         this.playerService = playerService;
+        this.resultService = resultService;
     }
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
 
+        Result result1 = new Result();
+        result1.setResult("Win");
+        result1.setScore("14-12");
+        result1.setDate(new Date(2021,5,8));
+
+        Result result2 = new Result();
+        result2.setResult("Win");
+        result2.setScore("13-8");
+        result2.setDate(new Date(2021,5,15));
+
         Game game1 = new Game(4,3,1,0,1,1,0,2,4);
         Game game2 = new Game(4,2,1,1,0,0,0,2,2);
         Game game3 = new Game(3,3,3,0,0,0,1,3,1);
         Game game4 = new Game(4,1,0,1,0,0,0,1,1);
+
+        List<Game> gamesList1 = new ArrayList<>();
+        gamesList1.add(game1); gamesList1.add(game3);
+        result1.setGamesList(gamesList1);
+
+        List<Game> gamesList2 = new ArrayList<>();
+        gamesList2.add(game2); gamesList2.add(game4);
+        result2.setGamesList(gamesList2);
 
         Player player1 = new Player();
         player1.setFirstName("Socks");
@@ -53,6 +76,7 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent>{
 
         playerService.savePlayer(player1);
         playerService.savePlayer(player2);
-
+        resultService.saveResult(result1);
+        resultService.saveResult(result2);
     }
 }

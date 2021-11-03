@@ -53,6 +53,10 @@ public class Game {
     @JsonIgnoreProperties("gameList")
     private Player player;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("gamesList")
+    private Result result;
+
     //region Helper Methods
     public static double calculateAVG(Integer hits, Integer atBats) {
         return (double) hits / (double) atBats;

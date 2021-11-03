@@ -1,5 +1,6 @@
 package com.softball.softballstats.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -18,6 +19,14 @@ public class Result {
     private String score;
     private Date date;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "result")
+    @JsonIgnoreProperties("result")
     private List<Game> gamesList;
+
+    public void setGamesList(List<Game> gamesList) {
+        this.gamesList = gamesList;
+        for (Game game : gamesList) {
+            game.setResult(this);
+        }
+    }
 }
