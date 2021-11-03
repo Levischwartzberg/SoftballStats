@@ -35,7 +35,7 @@ public class Player {
     private List<SeasonStats> seasonStatsList;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    LifetimeStats lifetimeStats;
+    private LifetimeStats lifetimeStats;
 
     @ManyToMany
     private List<Position> positionList;

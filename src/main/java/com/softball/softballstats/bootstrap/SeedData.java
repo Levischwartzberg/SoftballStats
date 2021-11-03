@@ -3,8 +3,10 @@ package com.softball.softballstats.bootstrap;
 import com.softball.softballstats.domain.Game;
 import com.softball.softballstats.domain.Player;
 import com.softball.softballstats.domain.Result;
+import com.softball.softballstats.domain.Season;
 import com.softball.softballstats.services.PlayerService;
 import com.softball.softballstats.services.ResultService;
+import com.softball.softballstats.services.SeasonService;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -17,15 +19,20 @@ import java.util.List;
 public class SeedData implements ApplicationListener<ContextRefreshedEvent>{
 
     PlayerService playerService;
-    ResultService resultService;
+    SeasonService seasonService;
 
-    public SeedData(PlayerService playerService, ResultService resultService) {
+    public SeedData(PlayerService playerService, SeasonService seasonService) {
         this.playerService = playerService;
-        this.resultService = resultService;
+        this.seasonService = seasonService;
     }
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
+
+        Season season = new Season();
+        season.setSession("Summer");
+        season.setYear(2021);
+        List<Result> resultList = new ArrayList<>();
 
         Result result1 = new Result();
         result1.setResult("Win");
@@ -49,6 +56,9 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent>{
         List<Game> gamesList2 = new ArrayList<>();
         gamesList2.add(game2); gamesList2.add(game4);
         result2.setGamesList(gamesList2);
+
+        resultList.add(result1); resultList.add(result2);
+        season.setResultList(resultList);
 
         Player player1 = new Player();
         player1.setFirstName("Socks");
@@ -76,7 +86,6 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent>{
 
         playerService.savePlayer(player1);
         playerService.savePlayer(player2);
-        resultService.saveResult(result1);
-        resultService.saveResult(result2);
+        seasonService.saveSeason(season);
     }
 }

@@ -23,6 +23,10 @@ public class Result {
     @JsonIgnoreProperties("result")
     private List<Game> gamesList;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("resultList")
+    private Season season;
+
     public void setGamesList(List<Game> gamesList) {
         this.gamesList = gamesList;
         for (Game game : gamesList) {
