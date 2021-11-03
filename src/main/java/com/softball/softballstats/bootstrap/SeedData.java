@@ -1,5 +1,7 @@
 package com.softball.softballstats.bootstrap;
 
+import com.softball.softballstats.utils.DateUtils;
+
 import com.softball.softballstats.domain.Game;
 import com.softball.softballstats.domain.Player;
 import com.softball.softballstats.domain.Result;
@@ -11,9 +13,8 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Component
 public class SeedData implements ApplicationListener<ContextRefreshedEvent>{
@@ -37,12 +38,12 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent>{
         Result result1 = new Result();
         result1.setResult("Win");
         result1.setScore("14-12");
-        result1.setDate(new Date(2021,5,8));
+        result1.setDate(DateUtils.parseDate("2021", "05", "08","18", "15"));
 
         Result result2 = new Result();
         result2.setResult("Win");
         result2.setScore("13-8");
-        result2.setDate(new Date(2021,5,15));
+        result2.setDate(DateUtils.parseDate("2021", "05", "15", "18", "00"));
 
         Game game1 = new Game(4,3,1,0,1,1,0,2,4);
         Game game2 = new Game(4,2,1,1,0,0,0,2,2);

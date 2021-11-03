@@ -11,6 +11,7 @@ function PlayerGameLog(props) {
         API.getGamesByPlayer(props.playerId)
             .then((res) => {
                 let gameArray = res.data;
+                console.log(gameArray);
                 return gameArray;
             })
             .then((gameArray) => setGames(gameArray))
@@ -18,7 +19,7 @@ function PlayerGameLog(props) {
     }
 
     function roundRates(rate) {
-        return (rate > 1) ? Number.parseFloat(rate).toPrecision(4) : Number.parseFloat(rate).toPrecision(3);
+        return (rate >= 1) ? Number.parseFloat(rate).toPrecision(4) : Number.parseFloat(rate).toPrecision(3);
     }
     
     return (
@@ -44,7 +45,7 @@ function PlayerGameLog(props) {
                    </tr>
                    {games.map((game) => (
                         <tr>
-                            <td>{game.gameId}</td>
+                            <td>{game.result.date}</td>
                             <td>{game.atBats}</td>
                             <td>{game.hits}</td>
                             <td>{game.singles}</td>

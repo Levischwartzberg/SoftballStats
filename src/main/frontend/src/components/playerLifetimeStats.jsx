@@ -17,7 +17,7 @@ function PlayerLifetimeStats(props) {
     }
 
     function roundRates(rate) {
-        return (rate > 1) ? Number.parseFloat(rate).toPrecision(4) : Number.parseFloat(rate).toPrecision(3);
+        return (rate >= 1) ? Number.parseFloat(rate).toPrecision(4) : Number.parseFloat(rate).toPrecision(3);
     }
 
     return (
