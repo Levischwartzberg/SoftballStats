@@ -21,6 +21,9 @@ function PlayerGameLog(props) {
     function roundRates(rate) {
         return (rate >= 1) ? Number.parseFloat(rate).toPrecision(4) : Number.parseFloat(rate).toPrecision(3);
     }
+    function convertDateTime(dateTime) {
+        return dateTime.split("T")[0] + " " + dateTime.split("T")[1].split(".")[0];
+    }
     
     return (
         <div>
@@ -45,7 +48,7 @@ function PlayerGameLog(props) {
                    </tr>
                    {games.map((game) => (
                         <tr>
-                            <td>{game.result.date}</td>
+                            <td>{convertDateTime(game.result.date)}</td>
                             <td>{game.atBats}</td>
                             <td>{game.hits}</td>
                             <td>{game.singles}</td>
