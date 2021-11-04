@@ -56,13 +56,13 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent>{
         result3.setScore("13-12");
         result3.setDate(DateUtils.parseDate("2021", "10", "18", "18", "00"));
 
-        Game game1 = new Game(4,3,1,0,1,1,0,2,4);
-        Game game2 = new Game(4,2,1,1,0,0,0,2,2);
-        Game game3 = new Game(3,3,3,0,0,0,1,3,1);
-        Game game4 = new Game(4,1,0,1,0,0,0,1,1);
+        Game game1 = new Game(3,4,3,1,0,1,1,0,2,4);
+        Game game2 = new Game(3,4,2,1,1,0,0,0,2,2);
+        Game game3 = new Game(1,3,3,3,0,0,0,1,3,1);
+        Game game4 = new Game(1,4,1,0,1,0,0,0,1,1);
 
-        Game game5 = new Game(4,2,1,1,0,0,0,2,0);
-        Game game6 = new Game(3,2,1,0,0,1,1,3,4);
+        Game game5 = new Game(3,4,2,1,1,0,0,0,2,0);
+        Game game6 = new Game(1,3,2,1,0,0,1,1,3,4);
 
         List<Game> gamesList1 = new ArrayList<>();
         gamesList1.add(game1); gamesList1.add(game3);

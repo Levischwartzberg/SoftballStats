@@ -19,7 +19,8 @@ public class Game {
 
     public Game() {}
 
-    public Game(Integer atBats, Integer hits, Integer singles, Integer doubles, Integer triples, Integer homeruns, Integer walks, Integer runs, Integer rbi) {
+    public Game(Integer lineupSpot, Integer atBats, Integer hits, Integer singles, Integer doubles, Integer triples, Integer homeruns, Integer walks, Integer runs, Integer rbi) {
+        this.lineupSpot = lineupSpot;
         this.atBats = atBats;
         this.hits = hits;
         this.singles = singles;
@@ -35,6 +36,7 @@ public class Game {
         this.ops = calculateOPS(obp, slg);
     }
 
+    private Integer lineupSpot;
     private Integer atBats;
     private Integer hits;
     private Integer singles;

@@ -32,6 +32,7 @@ function PlayerGameLog(props) {
                 <tbody>
                    <tr>
                        <th>Game</th>
+                       <th>Lineup Spot</th>
                        <th>AB</th>
                        <th>Hits</th>
                        <th>1B</th>
@@ -49,6 +50,7 @@ function PlayerGameLog(props) {
                    {games.map((game) => (
                         <tr>
                             <td>{convertDateTime(game.result.date)}</td>
+                            <td>{game.lineupSpot}</td>
                             <td>{game.atBats}</td>
                             <td>{game.hits}</td>
                             <td>{game.singles}</td>
