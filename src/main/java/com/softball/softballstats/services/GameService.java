@@ -14,6 +14,8 @@ public interface GameService {
 
     Iterable<Game> findAllGamesByPlayer(Integer playerId);
 
+    Iterable<Game> findAllGamesByResult(Integer resultId);
+
     Game saveGame(Game game);
 
     Game updateGame(Game game);

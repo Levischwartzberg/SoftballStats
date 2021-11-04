@@ -30,6 +30,11 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
+    public Iterable<Game> findAllGamesByResult(Integer resultId) {
+        return gameRepo.findAllByResultId(resultId);
+    }
+
+    @Override
     public Game saveGame(Game game) {
         return gameRepo.save(game);
     }

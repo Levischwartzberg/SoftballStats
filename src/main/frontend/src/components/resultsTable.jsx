@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import API from "../utils/API";
+import {Link} from 'react-router-dom';
 
 function ResultsTable(props) {
     const [season, setSeason] = useState({});
@@ -35,12 +36,18 @@ function ResultsTable(props) {
                         <th>Game Date</th>
                         <th>Result</th>
                         <th>Score</th>
+                        <th>Box Score</th>
                     </tr>
                     {results.map((result) => (
                         <tr>
                             <td>{convertDateTime(result.date)}</td>
                             <td>{result.result}</td>
                             <td>{result.score}</td>
+                            <td>
+                                <Link to={`/boxscore/${result.id}`}>
+                                    boxscore
+                                </Link>
+                            </td>
                         </tr>
                     ))}
                 </tbody>

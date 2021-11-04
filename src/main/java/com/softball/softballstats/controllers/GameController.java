@@ -19,9 +19,14 @@ public class GameController {
     @GetMapping("/")
     public Iterable<Game> getAllGames() {return gameService.findAllGames();}
 
-    @GetMapping("/{playerId}")
+    @GetMapping("/player/{playerId}")
     public Iterable<Game> getAllPlayerGames(@PathVariable Integer playerId) {
         return gameService.findAllGamesByPlayer(playerId);
+    }
+
+    @GetMapping("/result/{resultId}")
+    public Iterable<Game> getAllGamesByResult(@PathVariable Integer resultId) {
+        return gameService.findAllGamesByResult(resultId);
     }
 
     @PostMapping("/")
