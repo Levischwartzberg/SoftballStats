@@ -6,6 +6,12 @@ function Header() {
             <Link to="/">
                 Home
             </Link>
+            <Link to="/players">
+                Players
+            </Link>
+            <Link to="/seasons">
+                Seasons
+            </Link>
         </header>
     )
 }

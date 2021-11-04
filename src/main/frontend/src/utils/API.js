@@ -26,5 +26,9 @@ export default {
 
   getSeasonStatsForPlayer: function(playerId) {
     return axios.get(`/api/seasonStats/${playerId}`);
+  },
+
+  getAllSeasons: function() {
+    return axios.get("/api/season/");
   }
 }

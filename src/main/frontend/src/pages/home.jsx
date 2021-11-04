@@ -1,10 +1,7 @@
-import PlayerInput from "../components/playerInput.jsx";
-import PlayerTable from "../components/playerTable.jsx";
-
 function Home() {
     return (
         <div>
-            <PlayerTable></PlayerTable>
+            <h1>Welcome to Softball Reference</h1>
         </div>
     )
 }
