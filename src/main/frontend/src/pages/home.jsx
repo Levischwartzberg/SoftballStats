@@ -5,7 +5,6 @@ function Home() {
     return (
         <div>
             <PlayerTable></PlayerTable>
-            <PlayerInput></PlayerInput>
         </div>
     )
 }

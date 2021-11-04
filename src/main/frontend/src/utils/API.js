@@ -22,5 +22,9 @@ export default {
 
   getLifetimeStatsForPlayer: function(playerId) {
     return axios.get(`/api/lifetimeStats/${playerId}`);
+  },
+
+  getSeasonStatsForPlayer: function(playerId) {
+    return axios.get(`/api/seasonStats/${playerId}`);
   }
 }

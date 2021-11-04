@@ -11,7 +11,7 @@ function PlayerGameLog(props) {
         API.getGamesByPlayer(props.playerId)
             .then((res) => {
                 let gameArray = res.data;
-                console.log(gameArray);
+                // console.log(gameArray);
                 return gameArray;
             })
             .then((gameArray) => setGames(gameArray))
