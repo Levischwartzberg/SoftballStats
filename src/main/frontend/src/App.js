@@ -2,6 +2,7 @@ import './App.css';
 import Header from './components/header.jsx';
 import Home from './pages/home.jsx';
 import PlayerPage from './pages/playerPage.jsx';
+import SeasonPage from './pages/seasonPage';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Players from './pages/players';
 import Seasons from './pages/seasons';
@@ -23,6 +24,9 @@ function App() {
         </Switch>
         <Switch>
           <Route path="/playerPage/:id" component={PlayerPage} />
+        </Switch>
+        <Switch>
+          <Route path="/seasonPage/:id" component={SeasonPage} />
         </Switch>
       </Router>
     </div>

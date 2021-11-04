@@ -1,5 +1,6 @@
 import API from "../utils/API";
 import React, { useEffect, useState } from 'react';
+import {Link} from 'react-router-dom';
 
 function SeasonTable() {
     const [seasons, setSeasons] = useState([]);
@@ -27,8 +28,16 @@ function SeasonTable() {
                     </tr>
                     {seasons.map((season) => (
                         <tr>
-                            <td>{season.year}</td>
-                            <td>{season.session}</td>
+                            <td>
+                                <Link to={`seasonPage/${season.id}`}>
+                                    {season.year}
+                                </Link>
+                            </td>
+                            <td>
+                                <Link to={`seasonPage/${season.id}`}>
+                                    {season.session}
+                                </Link>
+                            </td>
                         </tr>
                     ))}
                 </tbody>

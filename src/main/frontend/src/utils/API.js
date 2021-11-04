@@ -30,5 +30,9 @@ export default {
 
   getAllSeasons: function() {
     return axios.get("/api/season/");
+  },
+
+  getSeasonById: function(seasonId) {
+    return axios.get(`/api/season/${seasonId}`);
   }
 }
