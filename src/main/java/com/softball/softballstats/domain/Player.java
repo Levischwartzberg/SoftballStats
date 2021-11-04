@@ -31,12 +31,6 @@ public class Player {
     @JsonIgnoreProperties("player")
     private List<Game> gameList;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<SeasonStats> seasonStatsList;
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private LifetimeStats lifetimeStats;
-
     @ManyToMany
     private List<Position> positionList;
 

@@ -1,5 +1,6 @@
 package com.softball.softballstats.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ public class SeasonStats {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    private Integer games;
     private Integer atBats;
     private Integer hits;
     private Integer singles;
@@ -29,6 +31,21 @@ public class SeasonStats {
     @ManyToOne
     private Player player;
 
-    @ManyToOne
+    @OneToOne
     private Season season;
+
+    //region Custom Methods
+    public void initializeCountingStatsWithZero() {
+        this.games = 0;
+        this.atBats = 0;
+        this.hits = 0;
+        this.singles = 0;
+        this.doubles = 0;
+        this.triples = 0;
+        this.homeruns = 0;
+        this.walks = 0;
+        this.runs = 0;
+        this.rbi = 0;
+    }
+    //endregion
 }
