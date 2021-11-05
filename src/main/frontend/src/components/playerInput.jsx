@@ -4,10 +4,20 @@ import API from '../utils/API';
 function PlayerInput() {
     const [playerObject, setPlayerObject] = useState({});
 
+    useEffect(() => {
+        setPlayerObject({batHand: "Right", throwHand: "Right"});
+    },[])
+
     function handleChange(event) {
 		const { name, value } = event.target;
 		setPlayerObject({ ...playerObject, [name]: value });
 	}
+    function handleSelectChange(event) {
+        console.log(event.target.value);
+        const { name, value } = event.target;
+		setPlayerObject({ ...playerObject, [name]: value });
+        console.log(playerObject);
+    }
 
     function handleFormSubmit(event) {
         event.preventDefault();
@@ -16,7 +26,9 @@ function PlayerInput() {
                 {firstName: playerObject.firstName,
                 lastName: playerObject.lastName,
                 height: playerObject.height,
-                weight: playerObject.weight
+                weight: playerObject.weight,
+                throwHand: playerObject.throwHand,
+                batHand: playerObject.batHand
             }).catch((err) => console.log(err));
         }
     }
@@ -38,6 +50,25 @@ function PlayerInput() {
             <label htmlFor="height">
                 Height
                 <input onChange={handleChange} placeholder="Height" type="text" name="height" />
+            </label>
+            <label htmlFor="throwHand">
+                Throwing Hand
+                {/* <input onChange={handleChange} placeholder="Throw Hand" type="text" name="throws" /> */}
+                <select id = "dropdown" onClick={handleSelectChange} name="throwHand">
+                    <option value="Right" disabled="true">Choose 1</option>
+                    <option value="Right">Right</option>
+                    <option value="Left">Left</option>
+                </select>
+            </label>
+            <label htmlFor="batHand">
+                Batting Side
+                {/* <input onChange={handleChange} placeholder="Throw Hand" type="text" name="throws" /> */}
+                <select id = "dropdown" onClick={handleSelectChange} name="batHand">
+                    <option value="Right" disabled="true">Choose 1</option>
+                    <option value="Right">Right</option>
+                    <option value="Left">Left</option>
+                    <option value="Switch">Switch</option>
+                </select>
             </label>
 
             <button

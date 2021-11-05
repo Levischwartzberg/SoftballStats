@@ -4,10 +4,12 @@ import Home from './pages/home.jsx';
 import PlayerPage from './pages/playerPage.jsx';
 import SeasonPage from './pages/seasonPage';
 import ResultPage from './pages/resultPage';
+import AdminHome from './pages/admin';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Players from './pages/players';
 import Seasons from './pages/seasons';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import AddPlayer from './pages/addPlayer';
 
 function App() {
   return (
@@ -32,6 +34,12 @@ function App() {
         </Switch>
         <Switch>
           <Route path="/boxscore/:id" component={ResultPage} />
+        </Switch>
+        <Switch>
+          <Route path="/admin" component={AdminHome} />
+        </Switch>
+        <Switch>
+          <Route path="/admin/addPlayer" component={AddPlayer} />
         </Switch>
       </Router>
     </div>

@@ -12,6 +12,9 @@ function Header() {
             <Link to="/seasons">
                 Seasons
             </Link>
+            <Link to="/admin">
+                Admin
+            </Link>
         </header>
     )
 }
