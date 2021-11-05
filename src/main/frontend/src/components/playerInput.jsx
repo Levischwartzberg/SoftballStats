@@ -12,12 +12,6 @@ function PlayerInput() {
 		const { name, value } = event.target;
 		setPlayerObject({ ...playerObject, [name]: value });
 	}
-    function handleSelectChange(event) {
-        console.log(event.target.value);
-        const { name, value } = event.target;
-		setPlayerObject({ ...playerObject, [name]: value });
-        console.log(playerObject);
-    }
 
     function handleFormSubmit(event) {
         event.preventDefault();
@@ -54,7 +48,7 @@ function PlayerInput() {
             <label htmlFor="throwHand">
                 Throwing Hand
                 {/* <input onChange={handleChange} placeholder="Throw Hand" type="text" name="throws" /> */}
-                <select id = "dropdown" onClick={handleSelectChange} name="throwHand">
+                <select id = "dropdown" onClick={handleChange} name="throwHand">
                     <option value="Right" disabled="true">Choose 1</option>
                     <option value="Right">Right</option>
                     <option value="Left">Left</option>
@@ -63,7 +57,7 @@ function PlayerInput() {
             <label htmlFor="batHand">
                 Batting Side
                 {/* <input onChange={handleChange} placeholder="Throw Hand" type="text" name="throws" /> */}
-                <select id = "dropdown" onClick={handleSelectChange} name="batHand">
+                <select id = "dropdown" onClick={handleChange} name="batHand">
                     <option value="Right" disabled="true">Choose 1</option>
                     <option value="Right">Right</option>
                     <option value="Left">Left</option>
