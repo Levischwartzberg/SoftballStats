@@ -1,14 +1,16 @@
 import API from "../utils/API";
 import React, { useEffect, useState } from 'react';
+import { Dropdown } from "react-bootstrap";
 
 function PlayerGameLog(props) {
     const [games, setGames] = useState([]);
+    const [seasons, setSeasons] = useState([]);
     useEffect(() => {
-        loadGames();
+        loadSeasons();
     }, [])
 
-    function loadGames() {
-        API.getGamesByPlayer(props.playerId)
+    function loadGames(seasonId) {
+        API.getGameLogBySeason(props.playerId, seasonId)
             .then((res) => {
                 let gameArray = res.data;
                 // console.log(gameArray);
@@ -16,6 +18,18 @@ function PlayerGameLog(props) {
             })
             .then((gameArray) => setGames(gameArray))
             .catch((err) => console.log(err));
+    }
+
+    function loadSeasons() {
+        API.getSeasonStatsForPlayer(props.playerId)
+            .then((res) => {
+                let seasonStatsArray = res.data;
+                let seasonsArray = [];
+                seasonStatsArray.forEach(season => seasonsArray.push(season.season));
+                return seasonsArray;
+            })
+            .then((seasons) => setSeasons(seasons))
+            .catch((error) => console.log(error))
     }
 
     function roundRates(rate) {
@@ -27,7 +41,22 @@ function PlayerGameLog(props) {
     
     return (
         <div>
-            <h3>Game Log</h3>
+            <h3>Game Logs</h3>
+            <Dropdown>
+                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                    Seasons
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                    {seasons.map((season) => (
+                        <Dropdown.Item>
+                            <button value={season.id} onClick={() => loadGames(season.id)}> 
+                                {season.session + " " + season.year}
+                            </button>
+                        </Dropdown.Item>
+                    ))}
+                </Dropdown.Menu>
+            </Dropdown>
             <table>
                 <tbody>
                    <tr>

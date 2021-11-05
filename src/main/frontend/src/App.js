@@ -7,6 +7,7 @@ import ResultPage from './pages/resultPage';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Players from './pages/players';
 import Seasons from './pages/seasons';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (

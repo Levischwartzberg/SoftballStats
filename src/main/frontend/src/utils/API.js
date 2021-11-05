@@ -20,6 +20,10 @@ export default {
     return axios.get(`/api/game/player/${playerId}`);
   },
 
+  getGameLogBySeason: function(playerId, seasonId) {
+    return axios.get(`/api/game/player/${playerId}/season/${seasonId}`);
+  },
+
   getGamesByResult: function(resultId) {
     return axios.get(`/api/game/result/${resultId}`);
   },
