@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -22,6 +23,18 @@ public class GameController {
     @GetMapping("/player/{playerId}")
     public Iterable<Game> getAllPlayerGames(@PathVariable Integer playerId) {
         return gameService.findAllGamesByPlayer(playerId);
+    }
+
+    @GetMapping("/player/{playerId}/season/{seasonId}")
+    public Iterable<Game> getAllPlayerGamesBySeason(@PathVariable Integer playerId, @PathVariable Integer seasonId) {
+        List<Game> gameList = (List<Game>) gameService.findAllGamesByPlayer(playerId);
+        List<Game> gamesBySeason = new ArrayList<>();
+        for(Game game: gameList) {
+            if(game.getResult().getSeason().getId() == seasonId) {
+                gamesBySeason.add(game);
+            }
+        }
+        return gamesBySeason;
     }
 
     @GetMapping("/result/{resultId}")
