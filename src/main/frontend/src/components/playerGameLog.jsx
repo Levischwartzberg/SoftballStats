@@ -1,5 +1,6 @@
 import API from "../utils/API";
 import React, { useEffect, useState } from 'react';
+import {Link} from 'react-router-dom';
 import { Dropdown } from "react-bootstrap";
 
 function PlayerGameLog(props) {
@@ -49,10 +50,8 @@ function PlayerGameLog(props) {
 
                 <Dropdown.Menu>
                     {seasons.map((season) => (
-                        <Dropdown.Item>
-                            <button value={season.id} onClick={() => loadGames(season.id)}> 
-                                {season.session + " " + season.year}
-                            </button>
+                        <Dropdown.Item value={season.id} onClick={() => loadGames(season.id)}> 
+                            {season.session + " " + season.year}
                         </Dropdown.Item>
                     ))}
                 </Dropdown.Menu>
@@ -78,7 +77,11 @@ function PlayerGameLog(props) {
                    </tr>
                    {games.map((game) => (
                         <tr>
-                            <td>{convertDateTime(game.result.date)}</td>
+                            <td>
+                                <Link to={`/boxscore/${game.result.id}`}>
+                                    {convertDateTime(game.result.date)}
+                                </Link>
+                            </td>
                             <td>{game.lineupSpot}</td>
                             <td>{game.atBats}</td>
                             <td>{game.hits}</td>

@@ -36,7 +36,11 @@ function Boxscore(props) {
                     {props.games.map((game) => (
                         <tr>
                             <td>{game.lineupSpot}</td>
-                            <td>{formatPlayerName(game.player)}</td>
+                            <td>
+                                <Link to={`/playerPage/${game.player.id}`}>
+                                    {formatPlayerName(game.player)}
+                                </Link>
+                            </td>
                             <td>{game.atBats}</td>
                             <td>{game.hits}</td>
                             <td>{game.singles}</td>
