@@ -1,15 +1,17 @@
 import './App.css';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import Header from './components/header.jsx';
 import Home from './pages/home.jsx';
 import PlayerPage from './pages/playerPage.jsx';
 import SeasonPage from './pages/seasonPage';
 import ResultPage from './pages/resultPage';
 import AdminHome from './pages/admin';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Players from './pages/players';
 import Seasons from './pages/seasons';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import AddPlayer from './pages/addPlayer';
+import AddGame from './pages/addGame';
 
 function App() {
   return (
@@ -40,6 +42,9 @@ function App() {
         </Switch>
         <Switch>
           <Route path="/admin/addPlayer" component={AddPlayer} />
+        </Switch>
+        <Switch>
+          <Route path="/admin/addGame" component={AddGame} />
         </Switch>
       </Router>
     </div>
