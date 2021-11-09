@@ -23,9 +23,9 @@ function PlayerInput(props) {
                 weight: playerObject.weight,
                 throwHand: playerObject.throwHand,
                 batHand: playerObject.batHand
-            }).catch((err) => console.log(err));
+            }).then((player) => props.saveNewPlayer(player.data))
+            .catch((err) => console.log(err));
         }
-        props.saveNewPlayer(playerObject);
     }
 
     return (
