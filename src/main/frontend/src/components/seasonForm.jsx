@@ -58,6 +58,12 @@ function SeasonForm() {
                 <AddSeasonPopup setGameSeason={setGameSeason} open={seasonForm} seasonForm={setSeasonForm}></AddSeasonPopup>
             )}
             <button onClick={tester}>tester</button>
+            {(gameSeason.session && gameSeason.year) && (
+                <label htmlFor="selected-season">
+                    selected season
+                    <h4 name="selected-season">{gameSeason.session + " " + gameSeason.year}</h4>
+                </label>
+            )}
         </div>
     )
 }
