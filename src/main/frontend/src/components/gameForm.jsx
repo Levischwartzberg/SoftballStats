@@ -8,19 +8,21 @@ function GameForm() {
     const [lineup, setLineup] = useState([]);
     const [season, setSeason] = useState({});
     const [result, setResult] = useState({});
+    const [gameStats, setGameStats] = useState([]);
 
     function saveGame(event) {
         event.preventDefault();
         console.log(lineup);
         console.log(result);
         console.log(season);
+        console.log(gameStats);
     }
 
     return (
         <div>
             <SeasonForm setSeason={setSeason}></SeasonForm>
             <ResultForm setResult={setResult}></ResultForm>
-            <GenerateLineup setLineup={setLineup}></GenerateLineup>
+            <GenerateLineup setLineup={setLineup} setGameStats={setGameStats}></GenerateLineup>
             <button onClick={saveGame}>Save Game</button>
         </div>
     )

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import API from "../utils/API";
 import styled from 'styled-components';
 import PlayerPopup from './playerPopup';
-import { propTypes } from 'react-bootstrap/esm/Image';
 
 function GenerateLineup(props) {
     const Input = styled.input`
@@ -25,6 +24,7 @@ function GenerateLineup(props) {
     const [lineup, setLineup] = useState([{lineupSpot: 1}, {lineupSpot: 2}, {lineupSpot: 3}, {lineupSpot: 4}, {lineupSpot: 5} ,{lineupSpot: 6},{lineupSpot: 7}, {lineupSpot: 8},{lineupSpot: 9}])
     const [playerPopup, setPlayerPopup] = useState(false);
     const [spot, setSpot] = useState(0);
+    const [gameStats, setGameStats] = useState([{},{},{},{},{},{},{},{},{}]);
 
     useEffect(() => {
         let newArr = [...lineup]
@@ -34,9 +34,25 @@ function GenerateLineup(props) {
         })
         setLineup(newArr);
     },[])
+
     useEffect(() => {
         props.setLineup(lineup);
     },[lineup])
+
+    useEffect(() => {
+        props.setGameStats(gameStats);
+    },[gameStats])
+
+    function handleChange(event) {
+		const { name, id, value } = event.target;
+		let gameStatsCopy = [...gameStats];
+        let playerObjCopy = {...gameStats[id-1]}
+        playerObjCopy = { ...playerObjCopy, [name]: value };
+        console.log(playerObjCopy);
+        gameStatsCopy[id-1] = playerObjCopy;
+        console.log(gameStatsCopy);
+        setGameStats(gameStatsCopy);
+	}
 
     function addLineupSpot(event) {
         event.preventDefault();
@@ -48,6 +64,9 @@ function GenerateLineup(props) {
             lastName: "Player"
         });
         setLineup(newArr);
+        let newStats = [...gameStats];
+        newStats.push({});
+        setGameStats(newStats);
     }
 
     function showPlayerPopup() {
@@ -86,31 +105,31 @@ function GenerateLineup(props) {
                                     </span>
                                 </td>
                                 <td>
-                                    <Input type="number" name="atBats" min="0" placeholder="0"></Input>
+                                    <Input onChange={handleChange} id={spot.lineupSpot} value={gameStats[spot.lineupSpot-1].atBats} type="number" name="atBats" min="0" placeholder="0"></Input>
                                 </td>
                                 <td>
-                                    <Input type="number" name="hits" min="0" placeholder="0"></Input>
+                                    <Input onChange={handleChange} id={spot.lineupSpot} value={gameStats[spot.lineupSpot-1].hits} type="number" name="hits" min="0" placeholder="0"></Input>
                                 </td>
                                 <td>
-                                    <Input type="number" name="singles" min="0" placeholder="0"></Input>
+                                    <Input onChange={handleChange} id={spot.lineupSpot} value={gameStats[spot.lineupSpot-1].singles} type="number" name="singles" min="0" placeholder="0"></Input>
                                 </td>
                                 <td>
-                                    <Input type="number" name="doubles" min="0" placeholder="0"></Input>
+                                    <Input onChange={handleChange} id={spot.lineupSpot} value={gameStats[spot.lineupSpot-1].doubles} type="number" name="doubles" min="0" placeholder="0"></Input>
                                 </td>
                                 <td>
-                                    <Input type="number" name="triples" min="0" placeholder="0"></Input>
+                                    <Input onChange={handleChange} id={spot.lineupSpot} value={gameStats[spot.lineupSpot-1].triples} type="number" name="triples" min="0" placeholder="0"></Input>
                                 </td>
                                 <td>
-                                    <Input type="number" name="homeruns" min="0" placeholder="0"></Input>
+                                    <Input onChange={handleChange} id={spot.lineupSpot} value={gameStats[spot.lineupSpot-1].homeruns} type="number" name="homeruns" min="0" placeholder="0"></Input>
                                 </td>
                                 <td>
-                                    <Input type="number" name="walks" min="0" placeholder="0"></Input>
+                                    <Input onChange={handleChange} id={spot.lineupSpot} value={gameStats[spot.lineupSpot-1].walks} type="number" name="walks" min="0" placeholder="0"></Input>
                                 </td>
                                 <td>
-                                    <Input type="number" name="runs" min="0" placeholder="0"></Input>
+                                    <Input onChange={handleChange} id={spot.lineupSpot} value={gameStats[spot.lineupSpot-1].runs} type="number" name="runs" min="0" placeholder="0"></Input>
                                 </td>
                                 <td>
-                                    <Input type="number" name="rbi" min="0" placeholder="0"></Input>
+                                    <Input onChange={handleChange} id={spot.lineupSpot} value={gameStats[spot.lineupSpot-1].rbi} type="number" name="rbi" min="0" placeholder="0"></Input>
                                 </td>
                             </tr>
                         ))}
