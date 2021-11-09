@@ -12,33 +12,46 @@ function GenerateLineup() {
         width: 50px;
         padding-right: 1px;
         `;
-    const [numPlayers, setNumPlayers] = useState([1,2,3,4,5,6,7,8,9]);
-    const [players, setPlayers] = useState([]);
-    const [playerPopup, setPlayerPopup] = useState(false);
-    
-    useEffect(() => {
-        loadPlayers();
-    },[]);
 
-    function loadPlayers() {
-        API.getPlayers()
-            .then((res) => {
-                return res.data;
-            })
-            .then((players) => setPlayers(players))
-            .catch((err) => console.log(err));
-    }
+    const PlayerDisplay = styled.h6`
+        padding: 0.5em;
+        margin: 0.5em;
+        border: solid black .05em;
+        min-width: 5em;
+        display: inline;
+    `;
+
+    const [lineup, setLineup] = useState([{lineupSpot: 1}, {lineupSpot: 2}, {lineupSpot: 3}, {lineupSpot: 4}, {lineupSpot: 5} ,{lineupSpot: 6},{lineupSpot: 7}, {lineupSpot: 8},{lineupSpot: 9}])
+    const [playerPopup, setPlayerPopup] = useState(false);
+    const [spot, setSpot] = useState(0);
+
+    useEffect(() => {
+        let newArr = [...lineup]
+        lineup.forEach((spot) => {
+            spot.firstName = spot.lineupSpot;
+            spot.lastName = "Player";
+        })
+        setLineup(newArr);
+    },[])
 
     function addLineupSpot(event) {
         event.preventDefault();
-        let newArr = [...numPlayers];
-        newArr.push(numPlayers[numPlayers.length-1]+1)
-        setNumPlayers(newArr);
+        let newArr = [...lineup];
+        let num = parseInt(lineup[lineup.length-1].lineupSpot) + 1
+        newArr.push({
+            lineupSpot: num,
+            firstName: num,
+            lastName: "Player"
+        });
+        setLineup(newArr);
     }
 
-    function showPlayerPopup(event) {
-        event.preventDefault();
+    function showPlayerPopup() {
         setPlayerPopup(true);
+    }
+
+    function relaySpot(lineupSpot) {
+        setSpot(lineupSpot);
     }
 
     return (
@@ -59,19 +72,14 @@ function GenerateLineup() {
                             <th>R</th>
                             <th>RBI</th>
                         </tr>
-                        {numPlayers.map((lineupSpot) => (
-                            <tr>
-                                <td>{lineupSpot}</td>
+                        {lineup.map((spot) => (
+                            <tr key={spot.lineupSpot}>
+                                <td>{spot.lineupSpot}</td>
                                 <td>
-                                    {/* <select name="players" id="">
-                                        <option disabled="true">
-                                            Choose Existing Player 
-                                        </option>
-                                        {players.map((player) => (
-                                            <option>{player.lastName + ", " + player.firstName}</option>
-                                        ))}
-                                    </select> */}
-                                    <button onClick={showPlayerPopup}>Select/Create Player</button>
+                                    <span>
+                                        <PlayerDisplay>{spot.lastName + ", " + spot.firstName}</PlayerDisplay>
+                                        <button onClick={(event) => {event.preventDefault(); showPlayerPopup(); relaySpot(spot.lineupSpot);}}>+</button>
+                                    </span>
                                 </td>
                                 <td>
                                     <Input type="number" name="atBats" min="0" placeholder="0"></Input>
@@ -113,7 +121,7 @@ function GenerateLineup() {
                 </table>
             </form>
             {playerPopup === true && (
-                <PlayerPopup open={playerPopup} setPlayerPopup={setPlayerPopup}></PlayerPopup>
+                <PlayerPopup setLineup={setLineup} open={playerPopup} setPlayerPopup={setPlayerPopup} lineup={lineup} spot={spot}></PlayerPopup>
             )}
         </div>
     )

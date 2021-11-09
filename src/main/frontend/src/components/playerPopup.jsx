@@ -9,6 +9,7 @@ function PlayerPopup(props) {
     const [createNew, setCreateNew] = useState(false);
     
     useEffect(() => {
+        console.log(props.spot)
         loadPlayers();
     },[]);
 
@@ -37,6 +38,10 @@ function PlayerPopup(props) {
     function chooseExistingPlayer(event) {
         event.preventDefault();
         console.log(playerObj);
+        playerObj.lineupSpot = props.spot;
+        let lineupCopy = [...props.lineup];
+        lineupCopy[props.spot - 1] = playerObj;
+        props.setLineup(lineupCopy);
         closeModal();
     }
 
@@ -62,7 +67,7 @@ function PlayerPopup(props) {
                 <label htmlFor="chooseExisting">
                     Choose Existing Player
                     <select name="existingPlayer" id="chooseExisting" onClick={choosePlayer}>
-                        <option disabled="true">
+                        <option disabled="true" selected="true">
                             Choose Existing Player 
                         </option>
                         {players.map((player) => (
