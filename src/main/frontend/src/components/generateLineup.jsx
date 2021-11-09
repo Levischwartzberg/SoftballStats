@@ -1,10 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { Dropdown } from "react-bootstrap";
 import API from "../utils/API";
+import styled from 'styled-components';
+import PlayerPopup from './playerPopup';
 
 function GenerateLineup() {
+    const Input = styled.input`
+        padding: 0.5em;
+        margin: 0.5em;
+        border: solid black .05em;
+        border-radius: 3px;
+        width: 50px;
+        padding-right: 1px;
+        `;
     const [numPlayers, setNumPlayers] = useState([1,2,3,4,5,6,7,8,9]);
     const [players, setPlayers] = useState([]);
+    const [playerPopup, setPlayerPopup] = useState(false);
     
     useEffect(() => {
         loadPlayers();
@@ -17,6 +27,18 @@ function GenerateLineup() {
             })
             .then((players) => setPlayers(players))
             .catch((err) => console.log(err));
+    }
+
+    function addLineupSpot(event) {
+        event.preventDefault();
+        let newArr = [...numPlayers];
+        newArr.push(numPlayers[numPlayers.length-1]+1)
+        setNumPlayers(newArr);
+    }
+
+    function showPlayerPopup(event) {
+        event.preventDefault();
+        setPlayerPopup(true);
     }
 
     return (
@@ -41,44 +63,58 @@ function GenerateLineup() {
                             <tr>
                                 <td>{lineupSpot}</td>
                                 <td>
-                                    <select name="players" id="">
+                                    {/* <select name="players" id="">
+                                        <option disabled="true">
+                                            Choose Existing Player 
+                                        </option>
                                         {players.map((player) => (
-                                            <option>{player.lastName + " " + player.firstName}</option>
+                                            <option>{player.lastName + ", " + player.firstName}</option>
                                         ))}
-                                    </select>
+                                    </select> */}
+                                    <button onClick={showPlayerPopup}>Select/Create Player</button>
                                 </td>
                                 <td>
-                                    <input type="number" name="atBats" min="0" id="" />
+                                    <Input type="number" name="atBats" min="0" placeholder="0"></Input>
                                 </td>
                                 <td>
-                                    <input type="number" name="hits" min="0" id="" />
+                                    <Input type="number" name="hits" min="0" placeholder="0"></Input>
                                 </td>
                                 <td>
-                                    <input type="number" name="singles" min="0" id="" />
+                                    <Input type="number" name="singles" min="0" placeholder="0"></Input>
                                 </td>
                                 <td>
-                                    <input type="number" name="doubles" min="0" id="" />
+                                    <Input type="number" name="doubles" min="0" placeholder="0"></Input>
                                 </td>
                                 <td>
-                                    <input type="number" name="triples" min="0" id="" />
+                                    <Input type="number" name="triples" min="0" placeholder="0"></Input>
                                 </td>
                                 <td>
-                                    <input type="number" name="homeruns" min="0" id="" />
+                                    <Input type="number" name="homeruns" min="0" placeholder="0"></Input>
                                 </td>
                                 <td>
-                                    <input type="number" name="walks" min="0" id="" />
+                                    <Input type="number" name="walks" min="0" placeholder="0"></Input>
                                 </td>
                                 <td>
-                                    <input type="number" name="runs" min="0" id="" />
+                                    <Input type="number" name="runs" min="0" placeholder="0"></Input>
                                 </td>
                                 <td>
-                                    <input type="number" name="rbi" min="0" id="" />
+                                    <Input type="number" name="rbi" min="0" placeholder="0"></Input>
                                 </td>
                             </tr>
                         ))}
+                        <tr>
+                            <td>
+                                <button onClick={addLineupSpot}> 
+                                    Add Player
+                                </button>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </form>
+            {playerPopup === true && (
+                <PlayerPopup open={playerPopup} setPlayerPopup={setPlayerPopup}></PlayerPopup>
+            )}
         </div>
     )
 }

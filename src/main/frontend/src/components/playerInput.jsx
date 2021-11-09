@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import API from '../utils/API';
 
-function PlayerInput() {
+function PlayerInput(props) {
     const [playerObject, setPlayerObject] = useState({});
 
     useEffect(() => {
@@ -25,6 +25,7 @@ function PlayerInput() {
                 batHand: playerObject.batHand
             }).catch((err) => console.log(err));
         }
+        props.saveNewPlayer(playerObject);
     }
 
     return (
