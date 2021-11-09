@@ -1,14 +1,22 @@
 import React, { useEffect, useState } from 'react';
 
-function ResultForm() {
+function ResultForm(props) {
     const [resultObj, setResultObj] = useState({});
     const [scoreObj, setScoreObj] = useState({});
+
+    useEffect(() => {
+        console.log("test")
+        props.setResult(resultObj);
+    },[resultObj])
+
+    useEffect(() => {
+        update();
+    },[scoreObj])
 
     function handleChange(event) {
         console.log(event.target.value);
 		const { name, value } = event.target;
 		setScoreObj({ ...scoreObj, [name]: value });
-        update();
 	}
 
     function calculateDecision(runsFor, runsAgainst) {

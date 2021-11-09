@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import API from "../utils/API";
 import styled from 'styled-components';
 import PlayerPopup from './playerPopup';
+import { propTypes } from 'react-bootstrap/esm/Image';
 
-function GenerateLineup() {
+function GenerateLineup(props) {
     const Input = styled.input`
         padding: 0.5em;
         margin: 0.5em;
@@ -33,6 +34,9 @@ function GenerateLineup() {
         })
         setLineup(newArr);
     },[])
+    useEffect(() => {
+        props.setLineup(lineup);
+    },[lineup])
 
     function addLineupSpot(event) {
         event.preventDefault();

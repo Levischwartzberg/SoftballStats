@@ -3,7 +3,7 @@ import { Dropdown } from "react-bootstrap";
 import API from "../utils/API";
 import AddSeasonPopup from './addSeasonPopup';
 
-function SeasonForm() {
+function SeasonForm(props) {
     const [seasons, setSeasons] = useState([]);
     const [gameSeason, setGameSeason] = useState({});
     const [seasonForm, setSeasonForm] = useState(false);
@@ -11,6 +11,10 @@ function SeasonForm() {
     useEffect(() => {
         loadSeasons();
     }, [])
+
+    useEffect(() => {
+        props.setSeason(gameSeason);
+    },[gameSeason])
 
     function loadSeasons() {
         API.getAllSeasons()
