@@ -18,11 +18,24 @@ function GameForm() {
     }
 
     function saveFromBoxscoreVO() {
+        let adjustedLineup = [];
+        lineup.forEach((player) => {
+            if(player.id) {
+                adjustedLineup.push(player);
+            }
+        })
+        let adjustedGames = [];
+        gameStats.forEach((game) => {
+            if(game.atBats || game.walks) {
+                adjustedGames.push(game);
+            }
+        })
+
         let boxscoreVO = {
-            playerList: lineup,
+            playerList: adjustedLineup,
             season: season,
             result: result,
-            gameList: gameStats
+            gameList: adjustedGames
         }
         console.log(boxscoreVO);
         API.updateFromSingleGameBoxscore(boxscoreVO)

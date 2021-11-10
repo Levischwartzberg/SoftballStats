@@ -54,6 +54,7 @@ function PlayerPopup(props) {
         console.log(newPlayerObj)
         newPlayerObj.lineupSpot = props.spot;
         newPlayerObj.gameList = [];
+        newPlayerObj.positionList = [];
         let lineupCopy = [...props.lineup];
         lineupCopy[props.spot - 1] = newPlayerObj;
         props.setLineup(lineupCopy);

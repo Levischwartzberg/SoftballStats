@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -43,16 +44,23 @@ public class BoxscoreVoController {
         originalResultList.add(result);
         updateSeason.setResultList(originalResultList);
 
+        List<Player> updatedPlayers = new ArrayList<>();
+
         for(int i = 0; i < playerList.size(); i++) {
+            System.out.println("i: " + i );
             if(!(playerList.get(i).getId() == null)) {
                 Player updatePlayer = playerService.findPlayerById(playerList.get(i).getId()).get();
+                System.out.println("current player: " + updatePlayer.getLastName());
                 List<Game> originalGameList = updatePlayer.getGameList();
                 Game game = gameList.get(i);
                 game.prepareObject();
                 originalGameList.add(game);
                 updatePlayer.setGameList(originalGameList);
-                playerService.updatePlayer(updatePlayer);
+                updatedPlayers.add(updatePlayer);
             }
+        }
+        for(Player player : updatedPlayers) {
+            playerService.updatePlayer(player);
         }
         seasonService.updateSeason(updateSeason);
         return new ResponseEntity<>(boxscoreVO, HttpStatus.ACCEPTED);
