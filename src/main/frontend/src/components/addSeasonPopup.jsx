@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react';
+import API from '../utils/API';
 import Modal from 'react-modal';
 
 function AddSeasonPopup(props) {
     const [seasonObj, setSeasonObj] = useState({});
 
     useEffect(() => {
-        setSeasonObj({session: "Spring"})
+        setSeasonObj({session: "Spring", resultList: []})
     }, [])
 
     function closeModal() {
@@ -19,7 +20,12 @@ function AddSeasonPopup(props) {
 
     function handleFormSubmit(event) {
         event.preventDefault();
-        props.setGameSeason(seasonObj);
+
+        if(seasonObj.session && seasonObj.year) {
+            API.addSeason(seasonObj)
+            .then((season) => props.setGameSeason(season.data))
+            .catch((err) => console.log(err))
+        }
         props.seasonForm(false);
     }
 
