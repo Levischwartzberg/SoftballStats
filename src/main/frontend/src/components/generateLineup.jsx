@@ -30,6 +30,7 @@ function GenerateLineup(props) {
         lineup.forEach((spot) => {
             spot.firstName = spot.lineupSpot;
             spot.lastName = "Player";
+            spot.gameList = [];
         })
         setLineup(newArr);
     },[])
