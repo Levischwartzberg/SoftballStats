@@ -1,11 +1,16 @@
 package com.softball.softballstats.controllers;
 
+import com.softball.softballstats.domain.Game;
 import com.softball.softballstats.domain.Player;
+import com.softball.softballstats.domain.Result;
+import com.softball.softballstats.domain.Season;
 import com.softball.softballstats.services.PlayerService;
+import com.softball.softballstats.services.SeasonService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -30,7 +35,25 @@ public class PlayerController {
 
     @PutMapping("/")
     public ResponseEntity<Player> updatePlayer(@RequestBody Player player) {
-        return new ResponseEntity<>(playerService.updatePlayer(player), HttpStatus.ACCEPTED);
+        Player updatedPlayer = playerService.findPlayerById(player.getId()).get();
+//        updatedPlayer.setFirstName(player.getFirstName());
+//        updatedPlayer.setLastName(player.getLastName());
+//        updatedPlayer.setHeight(player.getHeight());
+//        updatedPlayer.setWeight(player.getWeight());
+//        updatedPlayer.setBatHand(player.getBatHand());
+//        updatedPlayer.setThrowHand(player.getThrowHand());
+        List<Game> originalGameList = updatedPlayer.getGameList();
+
+        List<Game> gameList = player.getGameList();
+        for(Game game: gameList) {
+            if(game.getGameId() == null) {
+                game.prepareObject();
+                originalGameList.add(game);
+            }
+        }
+        updatedPlayer.setGameList(originalGameList);
+
+        return new ResponseEntity<>(playerService.updatePlayer(updatedPlayer), HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("/")

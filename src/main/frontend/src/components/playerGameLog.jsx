@@ -37,7 +37,10 @@ function PlayerGameLog(props) {
         return (rate >= 1) ? Number.parseFloat(rate).toPrecision(4) : Number.parseFloat(rate).toPrecision(3);
     }
     function convertDateTime(dateTime) {
-        return dateTime.split("T")[0] + " " + dateTime.split("T")[1].split(".")[0];
+        if(dateTime) {
+            return dateTime.split("T")[0] + " " + dateTime.split("T")[1].split(".")[0];
+        }
+        return null;
     }
     
     return (

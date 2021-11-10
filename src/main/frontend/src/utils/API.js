@@ -16,6 +16,10 @@ export default {
       return axios.post("/api/player/", playerData);
   },
 
+  updatePlayer: function(playerData) {
+    return axios.put("/api/player/", playerData);
+  },
+
   getGamesByPlayer: function(playerId) {
     return axios.get(`/api/game/player/${playerId}`);
   },
@@ -42,5 +46,17 @@ export default {
 
   getSeasonById: function(seasonId) {
     return axios.get(`/api/season/${seasonId}`);
+  },
+
+  addSeason: function(seasonData) {
+    return axios.post("/api/season/", seasonData);
+  },
+
+  updateSeason: function(seasonData) {
+    return axios.put("/api/season/", seasonData);
+  },
+
+  updateFromSingleGameBoxscore: function(boxscoreVO) {
+    return axios.put("/api/boxscoreVO/", boxscoreVO);
   }
 }

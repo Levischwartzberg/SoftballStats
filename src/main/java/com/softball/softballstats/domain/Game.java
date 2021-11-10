@@ -72,5 +72,42 @@ public class Game {
     public static double calculateOPS(double obp, double slg) {
         return obp + slg;
     }
+
+    public void prepareObject() {
+        if(this.lineupSpot == null ) {
+            lineupSpot = 0;
+        }
+        if(this.atBats == null){
+            atBats = 0;
+        }
+        if(this.hits == null){
+            hits = 0;
+        }
+        if(this.singles == null) {
+            singles = 0;
+        }
+        if(this.doubles == doubles) {
+            doubles = 0;
+        }
+        if(this.triples == null) {
+            triples = 0;
+        }
+        if(this.homeruns == null) {
+            homeruns = 0;
+        }
+        if(this.walks == null) {
+            walks = 0;
+        }
+        if(this.runs == null) {
+            runs = 0;
+        }
+        if(this.rbi == null) {
+            rbi = 0;
+        }
+        this.avg = calculateAVG(hits, atBats);
+        this.obp = calculateOBP(hits, atBats, walks);
+        this.slg = calculateSLG(singles, doubles, triples, homeruns, atBats);
+        this.ops = calculateOPS(obp, slg);
+    }
     //endregion
 }

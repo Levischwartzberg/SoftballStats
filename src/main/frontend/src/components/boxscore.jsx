@@ -37,9 +37,11 @@ function Boxscore(props) {
                         <tr>
                             <td>{game.lineupSpot}</td>
                             <td>
-                                <Link to={`/playerPage/${game.player.id}`}>
-                                    {formatPlayerName(game.player)}
-                                </Link>
+                                {game.player && (
+                                    <Link to={`/playerPage/${game.player.id}`}>
+                                        {formatPlayerName(game.player)}
+                                    </Link>
+                                )}
                             </td>
                             <td>{game.atBats}</td>
                             <td>{game.hits}</td>

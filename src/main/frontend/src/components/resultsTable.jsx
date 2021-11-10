@@ -25,7 +25,10 @@ function ResultsTable(props) {
     }
 
     function convertDateTime(dateTime) {
-        return dateTime.split("T")[0] + " " + dateTime.split("T")[1].split(".")[0];
+        if(dateTime) {
+            return dateTime.split("T")[0] + " " + dateTime.split("T")[1].split(".")[0];
+        }
+        return null;
     }
 
     return (

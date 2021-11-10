@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import API from "../utils/API";
 import styled from 'styled-components';
 import PlayerPopup from './playerPopup';
 
@@ -24,7 +23,7 @@ function GenerateLineup(props) {
     const [lineup, setLineup] = useState([{lineupSpot: 1}, {lineupSpot: 2}, {lineupSpot: 3}, {lineupSpot: 4}, {lineupSpot: 5} ,{lineupSpot: 6},{lineupSpot: 7}, {lineupSpot: 8},{lineupSpot: 9}])
     const [playerPopup, setPlayerPopup] = useState(false);
     const [spot, setSpot] = useState(0);
-    const [gameStats, setGameStats] = useState([{},{},{},{},{},{},{},{},{}]);
+    const [gameStats, setGameStats] = useState([{lineupSpot: 1}, {lineupSpot: 2}, {lineupSpot: 3}, {lineupSpot: 4}, {lineupSpot: 5} ,{lineupSpot: 6},{lineupSpot: 7}, {lineupSpot: 8},{lineupSpot: 9}])
 
     useEffect(() => {
         let newArr = [...lineup]
@@ -48,9 +47,7 @@ function GenerateLineup(props) {
 		let gameStatsCopy = [...gameStats];
         let playerObjCopy = {...gameStats[id-1]}
         playerObjCopy = { ...playerObjCopy, [name]: value };
-        console.log(playerObjCopy);
         gameStatsCopy[id-1] = playerObjCopy;
-        console.log(gameStatsCopy);
         setGameStats(gameStatsCopy);
 	}
 

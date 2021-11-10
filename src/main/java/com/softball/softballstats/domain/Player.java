@@ -28,7 +28,7 @@ public class Player {
     private String throwHand;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="player")
-    @JsonIgnoreProperties("player")
+    @JsonIgnoreProperties(value = "player", allowGetters = true, allowSetters = true)
     private List<Game> gameList;
 
     @ManyToMany

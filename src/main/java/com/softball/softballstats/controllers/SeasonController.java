@@ -1,8 +1,11 @@
 package com.softball.softballstats.controllers;
 
+import com.softball.softballstats.domain.Result;
 import com.softball.softballstats.domain.Season;
 import com.softball.softballstats.services.SeasonService;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/season")
@@ -29,7 +32,19 @@ public class SeasonController {
 
     @PutMapping("/")
     public Season updateSeason(@RequestBody Season season) {
-        return seasonService.updateSeason(season);
+        Season updatedSeason = seasonService.findSeasonById(season.getId()).get();
+        updatedSeason.setSession(season.getSession());
+        updatedSeason.setYear(season.getYear());
+        List<Result> originalResultList = updatedSeason.getResultList();
+
+        List<Result> resultList = season.getResultList();
+        for (Result result : resultList) {
+            if(result.getId() == null) {
+                originalResultList.add(result);
+            }
+        }
+        updatedSeason.setResultList(originalResultList);
+        return seasonService.updateSeason(updatedSeason);
     }
 
     @DeleteMapping("/")
