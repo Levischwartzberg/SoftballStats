@@ -86,7 +86,7 @@ public class Game {
         if(this.singles == null) {
             singles = 0;
         }
-        if(this.doubles == doubles) {
+        if(this.doubles == null) {
             doubles = 0;
         }
         if(this.triples == null) {
