@@ -44,7 +44,7 @@ function PlayerSeasonStats(props) {
                        <th>OPS</th>
                    </tr>
                    {seasonStats.map((season) => (
-                        <tr>
+                        <tr key={season.season.id}>
                             <td>{season.season.session + " " + season.season.year}</td>
                             <td>{season.games}</td>
                             <td>{season.atBats}</td>

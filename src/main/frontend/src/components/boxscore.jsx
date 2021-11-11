@@ -34,7 +34,7 @@ function Boxscore(props) {
                         <th>OPS</th>
                     </tr>
                     {props.games.map((game) => (
-                        <tr>
+                        <tr key={game.player.id}>
                             <td>{game.lineupSpot}</td>
                             <td>
                                 {game.player && (

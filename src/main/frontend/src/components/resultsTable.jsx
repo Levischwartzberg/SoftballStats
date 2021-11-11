@@ -42,7 +42,7 @@ function ResultsTable(props) {
                         <th>Box Score</th>
                     </tr>
                     {results.map((result) => (
-                        <tr>
+                        <tr key={result.id}>
                             <td>{convertDateTime(result.date)}</td>
                             <td>{result.result}</td>
                             <td>{result.score}</td>

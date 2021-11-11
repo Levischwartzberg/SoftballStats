@@ -27,7 +27,7 @@ function SeasonForm(props) {
 
     function chooseSeason(seasonId) {
         seasons.forEach(season => {
-            if(seasonId == season.id) {
+            if(seasonId === season.id) {
                 setGameSeason(season);
             }
         })
@@ -51,7 +51,7 @@ function SeasonForm(props) {
 
                 <Dropdown.Menu>
                     {seasons.map((season) => (
-                        <Dropdown.Item value={season.id} onClick={() => chooseSeason(season.id)}> 
+                        <Dropdown.Item key={season.id} value={season.id} onClick={() => chooseSeason(season.id)}> 
                             {season.session + " " + season.year}
                         </Dropdown.Item>
                     ))}

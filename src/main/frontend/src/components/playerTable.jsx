@@ -33,7 +33,7 @@ function PlayerTable() {
                         <th>Weight</th>
                     </tr>
                     {players.map((player) => (
-                        <tr>
+                        <tr key={player.id}>
                             <td>
                                 <Link to={`/playerPage/${player.id}`}>
                                     {player.firstName}
