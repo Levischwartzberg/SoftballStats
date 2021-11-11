@@ -21,6 +21,7 @@ function GameForm() {
         let adjustedLineup = [];
         lineup.forEach((player) => {
             if(player.id) {
+                player.gameList = [];
                 adjustedLineup.push(player);
             }
         })
