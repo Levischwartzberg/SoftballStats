@@ -27,7 +27,7 @@ function SeasonTable() {
                         <th>Session</th>
                     </tr>
                     {seasons.map((season) => (
-                        <tr>
+                        <tr key={season.id}>
                             <td>
                                 <Link to={`seasonPage/${season.id}`}>
                                     {season.year}

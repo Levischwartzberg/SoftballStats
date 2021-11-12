@@ -53,7 +53,7 @@ function PlayerGameLog(props) {
 
                 <Dropdown.Menu>
                     {seasons.map((season) => (
-                        <Dropdown.Item value={season.id} onClick={() => loadGames(season.id)}> 
+                        <Dropdown.Item key={season.id} value={season.id} onClick={() => loadGames(season.id)}> 
                             {season.session + " " + season.year}
                         </Dropdown.Item>
                     ))}
@@ -79,7 +79,7 @@ function PlayerGameLog(props) {
                        <th>OPS</th>
                    </tr>
                    {games.map((game) => (
-                        <tr>
+                        <tr key={game.id}>
                             <td>
                                 <Link to={`/boxscore/${game.result.id}`}>
                                     {convertDateTime(game.result.date)}

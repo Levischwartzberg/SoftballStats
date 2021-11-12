@@ -11,10 +11,8 @@ function ResultsTable(props) {
     }, [])
 
     function loadResults(seasonId) {
-        console.log(seasonId)
         API.getSeasonById(seasonId)
             .then((res) => {
-                console.log(res.data);
                 return res.data;
             })
             .then((season) => {
