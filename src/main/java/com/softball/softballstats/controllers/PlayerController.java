@@ -35,7 +35,6 @@ public class PlayerController {
 
     @PutMapping("/")
     public ResponseEntity<Player> updatePlayer(@RequestBody Player player) {
-        System.out.println(player.getId());
         Player updatedPlayer = playerService.findPlayerById(player.getId()).get();
         updatedPlayer.setFirstName(player.getFirstName());
         updatedPlayer.setLastName(player.getLastName());

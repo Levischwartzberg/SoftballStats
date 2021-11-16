@@ -14,7 +14,6 @@ function GameForm() {
     let history = useHistory();
 
     const redirect = () => {
-        console.log("redirect");
         history.push(`/seasonPage/${season.id}`);
     }
 

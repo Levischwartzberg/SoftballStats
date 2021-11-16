@@ -13,6 +13,9 @@ function AdminMenu() {
             <Link to="/admin/addGame">
                 Add Game
             </Link>
+            <Link to="/admin/editGame">
+                Edit Game
+            </Link>
         </header>
     )
 }

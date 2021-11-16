@@ -21,7 +21,6 @@ function EditPlayerForm(props) {
     let history = useHistory();
 
     const redirect = () => {
-        console.log("redirect");
         history.push(`/playerPage/${player.id}`);
     }
 
@@ -31,7 +30,6 @@ function EditPlayerForm(props) {
 	}
 
     function handleFormSubmit(event) {
-        console.log(player)
         event.preventDefault();
         if (player.firstName) {
             API.updatePlayer(player)
