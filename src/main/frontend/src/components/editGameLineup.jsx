@@ -14,6 +14,10 @@ function EditGameLineup(props) {
     const [lineup, setLineup] = useState([]);
 
     useEffect(() => {
+        props.setLineup(lineup);
+    },[lineup])
+
+    useEffect(() => {
         if(props.game.length) {
             let gameArray = [...props.game];
             let newLineup = [];
@@ -51,7 +55,7 @@ function EditGameLineup(props) {
                         <th>RBI</th>
                     </tr>
                     {lineup.map((playerGame) => (
-                        <tr>
+                        <tr key={playerGame.lineupSpot}>
                             <td>
                                 {playerGame.lineupSpot}
                             </td>
