@@ -35,23 +35,14 @@ public class PlayerController {
 
     @PutMapping("/")
     public ResponseEntity<Player> updatePlayer(@RequestBody Player player) {
+        System.out.println(player.getId());
         Player updatedPlayer = playerService.findPlayerById(player.getId()).get();
-//        updatedPlayer.setFirstName(player.getFirstName());
-//        updatedPlayer.setLastName(player.getLastName());
-//        updatedPlayer.setHeight(player.getHeight());
-//        updatedPlayer.setWeight(player.getWeight());
-//        updatedPlayer.setBatHand(player.getBatHand());
-//        updatedPlayer.setThrowHand(player.getThrowHand());
-        List<Game> originalGameList = updatedPlayer.getGameList();
-
-        List<Game> gameList = player.getGameList();
-        for(Game game: gameList) {
-            if(game.getGameId() == null) {
-                game.prepareObject();
-                originalGameList.add(game);
-            }
-        }
-        updatedPlayer.setGameList(originalGameList);
+        updatedPlayer.setFirstName(player.getFirstName());
+        updatedPlayer.setLastName(player.getLastName());
+        updatedPlayer.setHeight(player.getHeight());
+        updatedPlayer.setWeight(player.getWeight());
+        updatedPlayer.setBatHand(player.getBatHand());
+        updatedPlayer.setThrowHand(player.getThrowHand());
 
         return new ResponseEntity<>(playerService.updatePlayer(updatedPlayer), HttpStatus.ACCEPTED);
     }

@@ -7,6 +7,9 @@ function AdminMenu() {
             <Link to="/admin/addPlayer">
                 Add Player
             </Link>
+            <Link to="/admin/editPlayer">
+                Edit Player
+            </Link>
             <Link to="/admin/addGame">
                 Add Game
             </Link>

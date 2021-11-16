@@ -12,6 +12,8 @@ import Players from './pages/players';
 import Seasons from './pages/seasons';
 import AddPlayer from './pages/addPlayer';
 import AddGame from './pages/addGame';
+import EditPlayer from './pages/editPlayer';
+import EditPlayerPage from './pages/editPlayerPage';
 
 function App() {
   return (
@@ -45,6 +47,12 @@ function App() {
         </Switch>
         <Switch>
           <Route path="/admin/addGame" component={AddGame} />
+        </Switch>
+        <Switch>
+          <Route path="/admin/editPlayer" component={EditPlayer} />
+        </Switch>
+        <Switch>
+          <Route path="/playerEditPage/:id" component={EditPlayerPage} />
         </Switch>
       </Router>
     </div>
