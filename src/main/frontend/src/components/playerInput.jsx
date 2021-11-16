@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import API from '../utils/API';
+import { useHistory } from 'react-router-dom'
 
 function PlayerInput(props) {
     const [playerObject, setPlayerObject] = useState({});
@@ -7,6 +8,13 @@ function PlayerInput(props) {
     useEffect(() => {
         setPlayerObject({batHand: "Right", throwHand: "Right"});
     },[])
+
+    let history = useHistory();
+
+    const redirect = () => {
+        console.log("redirect");
+        history.push('/players');
+    }
 
     function handleChange(event) {
 		const { name, value } = event.target;
@@ -23,7 +31,14 @@ function PlayerInput(props) {
                 weight: playerObject.weight,
                 throwHand: playerObject.throwHand,
                 batHand: playerObject.batHand
-            }).then((player) => props.saveNewPlayer(player.data))
+            }).then((player) => {
+                if(history.location.pathname === "/admin/addPlayer"){
+                    redirect();
+                }
+                else {
+                    props.saveNewPlayer(player.data);
+                }
+            })
             .catch((err) => console.log(err));
         }
     }
