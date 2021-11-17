@@ -74,9 +74,8 @@ function EditGamePage() {
         let boxscoreVO = returnBoxscoreVO();
         console.log(boxscoreVO);
         API.updateExistingFromSingleGameBoxscore(boxscoreVO, result.season.id)
+        .then(() => redirect(`boxscore/${result.id}`))
         .catch((err) => console.log(err));
-
-        redirect(`boxscore/${result.id}`);
     }
 
     function deleteGame() {
