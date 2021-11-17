@@ -31,9 +31,13 @@ function EditGameLineup(props) {
     function handleChange(event) {
 		const { name, id, value } = event.target;
 		let lineupCopy = [...lineup];
-        let playerObjCopy = {...lineup[id-1]}
-        playerObjCopy = { ...playerObjCopy, [name]: value };
-        lineupCopy[id-1] = playerObjCopy;
+        lineupCopy.forEach((spot, index) => {
+            if(parseInt(id) === spot.lineupSpot) {
+                let playerObjCopy = {...spot};
+                playerObjCopy = {...playerObjCopy, [name]: value };
+                lineupCopy[index] = playerObjCopy;
+            }
+        })
         setLineup(lineupCopy);
 	}
 

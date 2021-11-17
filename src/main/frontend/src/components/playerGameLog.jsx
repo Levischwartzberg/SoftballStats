@@ -79,7 +79,7 @@ function PlayerGameLog(props) {
                        <th>OPS</th>
                    </tr>
                    {games.map((game) => (
-                        <tr key={game.id}>
+                        <tr key={Math.random()}>
                             <td>
                                 <Link to={`/boxscore/${game.result.id}`}>
                                     {convertDateTime(game.result.date)}
