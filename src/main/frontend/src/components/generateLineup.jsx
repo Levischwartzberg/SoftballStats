@@ -63,7 +63,7 @@ function GenerateLineup(props) {
         });
         setLineup(newArr);
         let newStats = [...gameStats];
-        newStats.push({});
+        newStats.push({lineupSpot: num});
         setGameStats(newStats);
     }
 
