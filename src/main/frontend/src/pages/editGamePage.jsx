@@ -3,6 +3,7 @@ import API from '../utils/API';
 import React, { useEffect, useState } from 'react';
 import EditGameLineup from '../components/editGameLineup';
 import EditResult from '../components/editResult';
+import { useHistory } from 'react-router-dom';
 
 function EditGamePage() {
     const { id } = useParams();
@@ -10,8 +11,13 @@ function EditGamePage() {
     const [game, setGame] = useState({});
     
     const [lineup, setLineup] = useState([]);
-    const [season, setSeason] = useState({});
     const [result, setResult] = useState({});
+
+    let history = useHistory();
+
+    const redirect = () => {
+        history.push(`/boxscore/${result.id}`);
+    }
 
     useEffect(() => {
         loadGame(id)
@@ -65,6 +71,8 @@ function EditGamePage() {
         console.log(boxscoreVO);
         API.updateExistingFromSingleGameBoxscore(boxscoreVO, result.season.id)
         .catch((err) => console.log(err));
+
+        redirect();
     }
 
     return (
