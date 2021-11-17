@@ -5,7 +5,9 @@ import com.softball.softballstats.domain.Player;
 import com.softball.softballstats.domain.Result;
 import com.softball.softballstats.domain.Season;
 import com.softball.softballstats.domain.VO.BoxscoreVO;
+import com.softball.softballstats.services.GameService;
 import com.softball.softballstats.services.PlayerService;
+import com.softball.softballstats.services.ResultService;
 import com.softball.softballstats.services.SeasonService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,10 +22,14 @@ public class BoxscoreVoController {
 
     private PlayerService playerService;
     private SeasonService seasonService;
+    private GameService gameService;
+    private ResultService resultService;
 
-    public BoxscoreVoController(PlayerService playerService, SeasonService seasonService) {
+    public BoxscoreVoController(PlayerService playerService, SeasonService seasonService, GameService gameService, ResultService resultService) {
         this.playerService = playerService;
         this.seasonService = seasonService;
+        this.gameService = gameService;
+        this.resultService = resultService;
     }
 
     @PutMapping("/")
@@ -112,5 +118,42 @@ public class BoxscoreVoController {
         seasonService.updateSeason(updateSeason);
 
         return new ResponseEntity<>(boxscoreVO, HttpStatus.ACCEPTED);
+    }
+
+    @DeleteMapping("/seasonId/{seasonId}/resultId/{resultId}")
+    public void deleteResultAndIndividualPlayerGames(@PathVariable Integer seasonId, @PathVariable Integer resultId) {
+        Season updateSeason = seasonService.findSeasonById(seasonId).get();
+        List<Result> originalResultList = updateSeason.getResultList();
+
+        int resultIndex = -1;
+        for(int i = 0; i < originalResultList.size(); i++) {
+            if(originalResultList.get(i).getId() == resultId) {
+                resultIndex = i;
+            }
+        }
+        originalResultList.remove(resultIndex);
+
+        updateSeason.setResultList(originalResultList);
+
+        List<Game> gameList = (List<Game>) gameService.findAllGamesByResult(resultId);
+        List<Player> playerList = new ArrayList<>();
+        for(Game game : gameList) {
+            Player player = playerService.findPlayerById(game.getPlayer().getId()).get();
+            List<Game> playerGameList = player.getGameList();
+            int gameIndex = -1;
+            for(int i = 0; i < playerGameList.size(); i++) {
+                if(playerGameList.get(i).getGameId() == game.getGameId()) {
+                    gameIndex = i;
+                }
+            }
+            playerGameList.remove(gameIndex);
+            player.setGameList(playerGameList);
+            playerList.add(player);
+        }
+
+        for(Player player : playerList) {
+            playerService.savePlayer(player);
+        }
+        seasonService.saveSeason(updateSeason);
     }
 }

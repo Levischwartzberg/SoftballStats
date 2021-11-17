@@ -60,7 +60,11 @@ export default {
     return axios.put("/api/boxscoreVO/", boxscoreVO);
   },
 
-  updateExistingFromSingleGameBoxscore: function(boxscoreVo, seasonId) {
-    return axios.put(`api/boxscoreVO/${seasonId}`, boxscoreVo);
+  updateExistingFromSingleGameBoxscore: function(boxscoreVO, seasonId) {
+    return axios.put(`api/boxscoreVO/${seasonId}`, boxscoreVO);
+  },
+
+  deleteResultAndGames: function(seasonId, resultId) {
+    return axios.delete(`/api/boxscoreVO/seasonId/${seasonId}/resultId/${resultId}`);
   }
 }

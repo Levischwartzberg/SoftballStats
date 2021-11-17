@@ -13,7 +13,7 @@ function DateEntry(props) {
     
     return (
         <form action="">
-            <input onChange={handleChange} type="datetime-local" name="game-time" min="2018-06-07T00:00" max="2025-06-14T00:00" value={trimDate(props.currentDate)}/>
+            <input onChange={handleChange} type="datetime-local" name="game-time" min="2020-01-01T00:00" max="2025-12-31T00:00" value={trimDate(props.currentDate)}/>
         </form>
     )
 }

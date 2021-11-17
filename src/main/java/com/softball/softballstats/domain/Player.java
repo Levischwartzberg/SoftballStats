@@ -27,7 +27,7 @@ public class Player {
     private String batHand;
     private String throwHand;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="player")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="player", orphanRemoval = true)
     @JsonIgnoreProperties(value = "player", allowGetters = true, allowSetters = true)
     private List<Game> gameList;
 

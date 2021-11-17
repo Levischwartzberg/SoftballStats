@@ -15,8 +15,8 @@ function EditGamePage() {
 
     let history = useHistory();
 
-    const redirect = () => {
-        history.push(`/boxscore/${result.id}`);
+    const redirect = (page) => {
+        history.push(`/${page}`);
     }
 
     useEffect(() => {
@@ -46,8 +46,7 @@ function EditGamePage() {
             .catch((error) => console.log(error))
     }
 
-    function saveGame() {
-        console.log(lineup);
+    function returnBoxscoreVO() {
         let adjustedLineup = [];
         lineup.forEach((spot) => {
             if(spot.player.id) {
@@ -68,11 +67,22 @@ function EditGamePage() {
             result: result,
             gameList: adjustedGames
         }
+        return boxscoreVO;
+    }
+
+    function saveGame() {
+        let boxscoreVO = returnBoxscoreVO();
         console.log(boxscoreVO);
         API.updateExistingFromSingleGameBoxscore(boxscoreVO, result.season.id)
         .catch((err) => console.log(err));
 
-        redirect();
+        redirect(`boxscore/${result.id}`);
+    }
+
+    function deleteGame() {
+        API.deleteResultAndGames(result.season.id, result.id)
+        .then(() => redirect(`seasonPage/${result.season.id}`))
+        .catch((err) => console.log(err));
     }
 
     return (
@@ -82,6 +92,7 @@ function EditGamePage() {
             )}
             <EditGameLineup setLineup={setLineup} game={game}></EditGameLineup>
             <button onClick={saveGame}>Save Game</button>
+            <button onClick={deleteGame}>Delete Game</button>
         </div>
     )
 }

@@ -4,10 +4,8 @@ import DateEntry from './dateEntry';
 function ResultForm(props) {
     const [resultObj, setResultObj] = useState({});
     const [scoreObj, setScoreObj] = useState({});
-    const [dateTime, setDateTime] = useState({});
 
     useEffect(() => {
-        console.log("test")
         props.setResult(resultObj);
     },[resultObj])
 

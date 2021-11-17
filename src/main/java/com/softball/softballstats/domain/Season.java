@@ -17,7 +17,7 @@ public class Season {
     private String session;
     private Integer year;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="season")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="season", orphanRemoval = true)
     private List<Result> resultList;
 
     public void setResultList(List<Result> resultList) {
