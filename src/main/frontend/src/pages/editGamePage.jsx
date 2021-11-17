@@ -12,7 +12,6 @@ function EditGamePage() {
     const [lineup, setLineup] = useState([]);
     const [season, setSeason] = useState({});
     const [result, setResult] = useState({});
-    const [gameStats, setGameStats] = useState([]);
 
     useEffect(() => {
         loadGame(id)
@@ -42,8 +41,30 @@ function EditGamePage() {
     }
 
     function saveGame() {
-        console.log(result);
         console.log(lineup);
+        let adjustedLineup = [];
+        lineup.forEach((spot) => {
+            if(spot.player.id) {
+                spot.player.gameList = [];
+                adjustedLineup.push(spot.player);
+            }
+        })
+        let adjustedGames = [];
+        lineup.forEach((game) => {
+            if(game.atBats || game.walks) {
+                game.player = {};
+                adjustedGames.push(game);
+            }
+        })
+        let boxscoreVO = {
+            playerList: adjustedLineup,
+            season: result.season,
+            result: result,
+            gameList: adjustedGames
+        }
+        console.log(boxscoreVO);
+        API.updateExistingFromSingleGameBoxscore(boxscoreVO, result.season.id)
+        .catch((err) => console.log(err));
     }
 
     return (

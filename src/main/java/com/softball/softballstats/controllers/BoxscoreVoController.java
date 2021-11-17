@@ -9,10 +9,7 @@ import com.softball.softballstats.services.PlayerService;
 import com.softball.softballstats.services.SeasonService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +60,57 @@ public class BoxscoreVoController {
             playerService.updatePlayer(player);
         }
         seasonService.updateSeason(updateSeason);
+        return new ResponseEntity<>(boxscoreVO, HttpStatus.ACCEPTED);
+    }
+
+    @PutMapping("/{seasonId}")
+    public ResponseEntity<BoxscoreVO> updateResultsFromBoxscoreVO(@RequestBody BoxscoreVO boxscoreVO, @PathVariable Integer seasonId) {
+        List<Player> playerList = boxscoreVO.getPlayerList();
+        List<Game> gameList = boxscoreVO.getGameList();
+        Result result = boxscoreVO.getResult();
+        result.setGamesList(gameList);
+
+        Season updateSeason = seasonService.findSeasonById(seasonId).get();
+        List<Result> originalResultList = updateSeason.getResultList();
+        int resultIdx = 0;
+        for(int i = 0; i < originalResultList.size(); i++ ) {
+            if(originalResultList.get(i).getId() == result.getId()) {
+                resultIdx = i;
+            }
+        }
+        originalResultList.set(resultIdx, result);
+        updateSeason.setResultList(originalResultList);
+
+        List<Player> updatedPlayers = new ArrayList<>();
+
+        for(int i = 0; i < playerList.size(); i++) {
+            if(!(playerList.get(i).getId() == null)) {
+                Player updatePlayer = playerService.findPlayerById(playerList.get(i).getId()).get();
+
+                List<Game> originalGameList = updatePlayer.getGameList();
+
+                Game game = gameList.get(i);
+                game.prepareObject();
+
+                int index = 0;
+
+                for(int j = 0; j < originalGameList.size(); j++ ) {
+                    if(originalGameList.get(j).getGameId() == game.getGameId()) {
+                        index = j;
+                    }
+                }
+
+                originalGameList.set(index, game);
+
+                updatePlayer.setGameList(originalGameList);
+                updatedPlayers.add(updatePlayer);
+            }
+        }
+        for(Player player : updatedPlayers) {
+            playerService.updatePlayer(player);
+        }
+        seasonService.updateSeason(updateSeason);
+
         return new ResponseEntity<>(boxscoreVO, HttpStatus.ACCEPTED);
     }
 }

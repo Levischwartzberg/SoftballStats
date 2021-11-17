@@ -45,7 +45,7 @@ function GameForm() {
             gameList: adjustedGames
         }
         console.log(boxscoreVO);
-        API.updateFromSingleGameBoxscore(boxscoreVO)
+        API.saveNewFromSingleGameBoxscore(boxscoreVO)
         .catch((err) => console.log(err));
     }
     
