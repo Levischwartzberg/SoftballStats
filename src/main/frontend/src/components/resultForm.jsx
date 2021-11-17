@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import DateEntry from './dateEntry';
 
 function ResultForm(props) {
     const [resultObj, setResultObj] = useState({});
     const [scoreObj, setScoreObj] = useState({});
+    const [dateTime, setDateTime] = useState({});
 
     useEffect(() => {
         console.log("test")
@@ -47,9 +49,10 @@ function ResultForm(props) {
         }
     }
 
-    function tester() {
-        update();
-        console.log(resultObj);
+    function setDate(dateString) {
+        let resultObjCopy = {...resultObj};
+        resultObjCopy.date = dateString;
+        setResultObj(resultObjCopy);
     }
 
     return (
@@ -63,8 +66,8 @@ function ResultForm(props) {
                     Runs Against
                     <input type="number" placeholder="0" onChange={handleChange} name="runsAgainst"/>
                 </label>
+                <DateEntry getDate={setDate}></DateEntry>
             </form>
-            <button onClick={tester}>tester</button>
         </div>
     )
 }

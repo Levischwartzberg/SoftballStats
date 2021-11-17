@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import DateEntry from "./dateEntry";
 
 function EditResult(props) {
     const [result, setResult] = useState({});
@@ -72,6 +73,12 @@ function EditResult(props) {
         }
         return score;
     }
+
+    function setDate(dateString) {
+        let resultCopy = {...result};
+        resultCopy.date = dateString;
+        setResult(resultCopy);
+    }
     
     return (
         <div>
@@ -84,6 +91,7 @@ function EditResult(props) {
                     Runs Against
                     <input type="number" value={scoreObj.runsAgainst} onChange={handleChange} name="runsAgainst"/>
                 </label>
+                <DateEntry getDate={setDate} currentDate={result.date}></DateEntry>
             </form>
         </div>
     )
