@@ -4,17 +4,32 @@ import { useHistory } from 'react-router-dom'
 
 function EditPlayerForm(props) {
     const [player, setPlayer] = useState({});
+    const [heightObj, setHeightObj] = useState({});
+
     useEffect(() => {
         loadPlayer();
     },[])
 
+    function parseHeight(playerObj) {
+        let feet = playerObj.height.split("'")[0];
+        let inches = playerObj.height.split("'")[1];
+        let newHeightObj = {
+            feet: feet,
+            inches: inches
+        }
+        setHeightObj(newHeightObj);
+    }
+
     function loadPlayer() {
         API.getPlayerById(props.playerId)
             .then((res) => {
-                let person = res.data;
-                return person;
+                let player = res.data;
+                return player;
             })
-            .then((person) => setPlayer(person))
+            .then((player) => {
+                setPlayer(player);
+                parseHeight(player);
+            })
             .catch((err) => console.log(err));
     }
 
@@ -28,6 +43,16 @@ function EditPlayerForm(props) {
 		const { name, value } = event.target;
 		setPlayer({ ...player, [name]: value });
 	}
+
+    function handleHeightChange(event) {
+        const { name, value } = event.target;
+        setHeightObj({ ...heightObj, [name]: value});
+    }
+
+    useEffect(() => {
+        let heightString = heightObj.feet + "'" + heightObj.inches;
+        setPlayer({...player, height: heightString});
+    },[heightObj])
 
     function handleFormSubmit(event) {
         event.preventDefault();
@@ -54,7 +79,8 @@ function EditPlayerForm(props) {
             </label>
             <label htmlFor="height">
                 Height
-                <input onChange={handleChange} placeholder="Height" type="text" name="height" value={player.height}/>
+                <input onChange={handleHeightChange} value={heightObj.feet} type="number" name="feet" min="4" max="7"/>
+                <input onChange={handleHeightChange} value={heightObj.inches} type="number" name="inches" min="0" max="11"/>
             </label>
             <label htmlFor="throwHand">
                 Throwing Hand

@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom'
 
 function PlayerInput(props) {
     const [playerObject, setPlayerObject] = useState({});
+    const [heightObj, setHeightObj] = useState({feet: 6, inches: 0});
 
     useEffect(() => {
         setPlayerObject({batHand: "Right", throwHand: "Right"});
@@ -20,6 +21,16 @@ function PlayerInput(props) {
 		const { name, value } = event.target;
 		setPlayerObject({ ...playerObject, [name]: value });
 	}
+
+    function handleHeightChange(event) {
+        const { name, value } = event.target;
+        setHeightObj({ ...heightObj, [name]: value});
+    }
+
+    useEffect(() => {
+        let heightString = heightObj.feet + "'" + heightObj.inches;
+        setPlayerObject({...playerObject, height: heightString});
+    },[heightObj])
 
     function handleFormSubmit(event) {
         event.preventDefault();
@@ -54,12 +65,13 @@ function PlayerInput(props) {
                 <input onChange={handleChange} placeholder="Last Name" type="text" name="lastName" />
             </label>
             <label htmlFor="weight">
-                Weight
-                <input onChange={handleChange} placeholder="Weight" type="text" name="weight" />
+                Weight (lbs)
+                <input onChange={handleChange} placeholder="Weight (lbs)" type="text" name="weight" />
             </label>
             <label htmlFor="height">
                 Height
-                <input onChange={handleChange} placeholder="Height" type="text" name="height" />
+                <input onChange={handleHeightChange} value={heightObj.feet} type="number" name="feet" min="4" max="7"/>
+                <input onChange={handleHeightChange} value={heightObj.inches} type="number" name="inches" min="0" max="11"/>
             </label>
             <label htmlFor="throwHand">
                 Throwing Hand
