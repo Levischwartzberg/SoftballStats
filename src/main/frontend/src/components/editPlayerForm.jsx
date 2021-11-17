@@ -75,7 +75,7 @@ function EditPlayerForm(props) {
             </label>
             <label htmlFor="weight">
                 Weight
-                <input onChange={handleChange} placeholder="Weight" type="text" name="weight" value={player.weight}/>
+                <input onChange={handleChange} placeholder="Weight" type="number" name="weight" min="50" max="500" value={player.weight}/>
             </label>
             <label htmlFor="height">
                 Height

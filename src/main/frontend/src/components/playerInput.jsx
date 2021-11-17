@@ -66,7 +66,7 @@ function PlayerInput(props) {
             </label>
             <label htmlFor="weight">
                 Weight (lbs)
-                <input onChange={handleChange} placeholder="Weight (lbs)" type="text" name="weight" />
+                <input onChange={handleChange} placeholder="Weight" type="number" name="weight" min="50" max="500"/>
             </label>
             <label htmlFor="height">
                 Height
