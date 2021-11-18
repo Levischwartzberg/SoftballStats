@@ -18,6 +18,7 @@ public class Season {
     private Integer year;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="season", orphanRemoval = true)
+    @OrderColumn
     private List<Result> resultList;
 
     public void setResultList(List<Result> resultList) {

@@ -21,6 +21,7 @@ public class Result {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "result")
     @JsonIgnoreProperties("result")
+    @OrderColumn
     private List<Game> gamesList;
 
     @ManyToOne(cascade = CascadeType.ALL)

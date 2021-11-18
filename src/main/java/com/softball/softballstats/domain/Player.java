@@ -14,7 +14,7 @@ import java.util.List;
 public class Player {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
@@ -29,6 +29,7 @@ public class Player {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="player", orphanRemoval = true)
     @JsonIgnoreProperties(value = "player", allowGetters = true, allowSetters = true)
+    @OrderColumn
     private List<Game> gameList;
 
     @ManyToMany

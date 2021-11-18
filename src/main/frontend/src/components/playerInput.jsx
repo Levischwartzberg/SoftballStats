@@ -3,12 +3,8 @@ import API from '../utils/API';
 import { useHistory } from 'react-router-dom'
 
 function PlayerInput(props) {
-    const [playerObject, setPlayerObject] = useState({});
+    const [playerObject, setPlayerObject] = useState({batHand: "Right", throwHand: "Right"});
     const [heightObj, setHeightObj] = useState({feet: 6, inches: 0});
-
-    useEffect(() => {
-        setPlayerObject({batHand: "Right", throwHand: "Right"});
-    },[])
 
     let history = useHistory();
 
