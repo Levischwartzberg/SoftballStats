@@ -13,7 +13,9 @@ function SeasonForm(props) {
     }, [])
 
     useEffect(() => {
-        props.setSeason(gameSeason);
+        let seasonCopy = {...gameSeason};
+        seasonCopy.resultList = [];
+        props.setSeason(seasonCopy);
     },[gameSeason])
 
     function loadSeasons() {
