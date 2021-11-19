@@ -33,7 +33,27 @@ function GenerateLineup(props) {
             spot.gameList = [];
         })
         setLineup(newArr);
+        initializeStats();
     },[])
+
+    function initializeStats() {
+        let newArr = [];
+        gameStats.forEach((statline) => {
+            let newStatline = {...statline};
+            newStatline.atBats = 0;
+            newStatline.hits = 0;
+            newStatline.singles = 0;
+            newStatline.doubles = 0;
+            newStatline.triples = 0;
+            newStatline.homeruns = 0;
+            newStatline.walks = 0;
+            newStatline.runs = 0;
+            newStatline.rbi = 0;
+
+            newArr.push(newStatline);
+        })
+        setGameStats(newArr);
+    }
 
     useEffect(() => {
         props.setLineup(lineup);
@@ -106,19 +126,19 @@ function GenerateLineup(props) {
                                     <Input onChange={handleChange} id={spot.lineupSpot} value={gameStats[spot.lineupSpot-1].atBats} type="number" name="atBats" min="0" placeholder="0"></Input>
                                 </td>
                                 <td>
-                                    <Input onChange={handleChange} id={spot.lineupSpot} value={gameStats[spot.lineupSpot-1].hits} type="number" name="hits" min="0" placeholder="0"></Input>
+                                    <Input onChange={handleChange} id={spot.lineupSpot} value={gameStats[spot.lineupSpot-1].hits} type="number" name="hits" min="0" max={gameStats[spot.lineupSpot-1].atBats} placeholder="0"></Input>
                                 </td>
                                 <td>
-                                    <Input onChange={handleChange} id={spot.lineupSpot} value={gameStats[spot.lineupSpot-1].singles} type="number" name="singles" min="0" placeholder="0"></Input>
+                                    <Input onChange={handleChange} id={spot.lineupSpot} value={gameStats[spot.lineupSpot-1].singles} type="number" name="singles" min="0" max={gameStats[spot.lineupSpot-1].hits - gameStats[spot.lineupSpot-1].doubles - gameStats[spot.lineupSpot-1].triples - gameStats[spot.lineupSpot-1].homeruns} placeholder="0"></Input>
                                 </td>
                                 <td>
-                                    <Input onChange={handleChange} id={spot.lineupSpot} value={gameStats[spot.lineupSpot-1].doubles} type="number" name="doubles" min="0" placeholder="0"></Input>
+                                    <Input onChange={handleChange} id={spot.lineupSpot} value={gameStats[spot.lineupSpot-1].doubles} type="number" name="doubles" min="0" max={gameStats[spot.lineupSpot-1].hits - gameStats[spot.lineupSpot-1].singles - gameStats[spot.lineupSpot-1].triples - gameStats[spot.lineupSpot-1].homeruns} placeholder="0"></Input>
                                 </td>
                                 <td>
-                                    <Input onChange={handleChange} id={spot.lineupSpot} value={gameStats[spot.lineupSpot-1].triples} type="number" name="triples" min="0" placeholder="0"></Input>
+                                    <Input onChange={handleChange} id={spot.lineupSpot} value={gameStats[spot.lineupSpot-1].triples} type="number" name="triples" min="0" max={gameStats[spot.lineupSpot-1].hits - gameStats[spot.lineupSpot-1].singles - gameStats[spot.lineupSpot-1].doubles - gameStats[spot.lineupSpot-1].homeruns} placeholder="0"></Input>
                                 </td>
                                 <td>
-                                    <Input onChange={handleChange} id={spot.lineupSpot} value={gameStats[spot.lineupSpot-1].homeruns} type="number" name="homeruns" min="0" placeholder="0"></Input>
+                                    <Input onChange={handleChange} id={spot.lineupSpot} value={gameStats[spot.lineupSpot-1].homeruns} type="number" name="homeruns" min="0" max={gameStats[spot.lineupSpot-1].hits - gameStats[spot.lineupSpot-1].singles - gameStats[spot.lineupSpot-1].doubles - gameStats[spot.lineupSpot-1].triples} placeholder="0"></Input>
                                 </td>
                                 <td>
                                     <Input onChange={handleChange} id={spot.lineupSpot} value={gameStats[spot.lineupSpot-1].walks} type="number" name="walks" min="0" placeholder="0"></Input>

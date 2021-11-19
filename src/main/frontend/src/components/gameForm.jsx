@@ -40,7 +40,7 @@ function GameForm() {
         })
         let adjustedGames = [];
         gameStats.forEach((game) => {
-            if(game.atBats || game.walks) {
+            if(game.atBats > 0 || game.walks > 0) {
                 adjustedGames.push(game);
             }
         })
