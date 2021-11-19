@@ -3,11 +3,13 @@ import API from '../utils/API';
 import React, { useEffect, useState } from 'react';
 import EditGameLineup from '../components/editGameLineup';
 import EditResult from '../components/editResult';
+import DeletePopup from '../components/areYouSurePopup';
 import { useHistory } from 'react-router-dom';
 
 function EditGamePage() {
     const { id } = useParams();
 
+    const [deletePopup, setDeletePopup] = useState(false);
     const [game, setGame] = useState({});
     
     const [lineup, setLineup] = useState([]);
@@ -79,9 +81,7 @@ function EditGamePage() {
     }
 
     function deleteGame() {
-        API.deleteResultAndGames(result.season.id, result.id)
-        .then(() => redirect(`seasonPage/${result.season.id}`))
-        .catch((err) => console.log(err));
+        setDeletePopup(true);
     }
 
     return (
@@ -90,6 +90,7 @@ function EditGamePage() {
                 <EditResult setResult={setResult} result={result}></EditResult>
             )}
             <EditGameLineup setLineup={setLineup} game={game}></EditGameLineup>
+            <DeletePopup setDeletePopup={setDeletePopup} open={deletePopup} result={result}></DeletePopup>
             <button onClick={saveGame}>Save Game</button>
             <button onClick={deleteGame}>Delete Game</button>
         </div>
