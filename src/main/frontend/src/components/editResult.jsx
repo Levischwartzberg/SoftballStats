@@ -91,9 +91,10 @@ function EditResult(props) {
                     <span style={{fontWeight: "bold"}}> Runs Against: </span>
                     <input type="number" value={scoreObj.runsAgainst} onChange={handleChange} name="runsAgainst"/>
                 </label>
+                <br/>
                 <label htmlFor="dateEntry">
                     <span style={{fontWeight: "bold"}}> Date: </span>
-                    <DateEntry name="dateEmtry" getDate={setDate} currentDate={result.date}></DateEntry>
+                    <DateEntry name="dateEntry" getDate={setDate} currentDate={result.date}></DateEntry>
                 </label>
             </form>
         </div>

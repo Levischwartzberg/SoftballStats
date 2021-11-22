@@ -29,7 +29,7 @@ function DeletePopup(props) {
             >
                 <button onClick={closeModal}>X</button>
                 <h3>Are you sure you want to delete this result? It will delete all the stats from this particular game.</h3>
-                <button className={'btn submit'} onClick={(event) => {event.preventDefault(); deleteResult(props.result)}}>
+                <button className="btn btn-danger" onClick={(event) => {event.preventDefault(); deleteResult(props.result)}}>
 					Yes I'm Sure
 			    </button>
             </Modal>

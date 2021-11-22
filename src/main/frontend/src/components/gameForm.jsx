@@ -58,6 +58,7 @@ function GameForm() {
     }
 
     function validate() {
+        console.log(result);
         const playerIds = [];
         lineup.forEach((player) => {
             if(player.id) {

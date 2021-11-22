@@ -46,8 +46,8 @@ function PlayerGameLog(props) {
     return (
         <div>
             <h3>Game Logs</h3>
-            <Dropdown>
-                <Dropdown.Toggle variant="success" id="dropdown-basic">
+            <Dropdown className="custom-dropdown">
+                <Dropdown.Toggle variant="" id="dropdown-basic">
                     Seasons
                 </Dropdown.Toggle>
 

@@ -94,6 +94,7 @@ table th {
 table td {
   border: rgb(175, 170, 170) solid 1px;
   background-color: rgb(240, 229, 229);
+  text-align: center;
 }
 
 tbody tr:hover td {
