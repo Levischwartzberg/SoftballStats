@@ -11,3 +11,100 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/*custom css*/
+.content {
+  margin: 5px 20px;
+  text-align: left;
+}
+
+/*navbars*/
+.main-nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: rgb(155, 151, 151);
+}
+
+.main-nav ul li {
+  float: left;
+}
+
+.main-nav ul li a {
+  display: block;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.main-nav ul li a:hover {
+  display: block;
+  color: rgb(63, 3, 3);
+  text-align: center;
+  padding: 14px 16px;
+}
+
+.admin-menu {
+  margin-bottom: 30px;
+}
+
+.admin-menu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: rgb(92, 82, 82);
+}
+
+.admin-menu ul li {
+  float: left;
+}
+
+.admin-menu ul li a {
+  display: block;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  padding: 10px 10px;
+  text-decoration: none;
+}
+
+.admin-menu ul li a:hover {
+  display: block;
+  color: rgb(41, 25, 25);
+  text-align: center;
+  padding: 10px 10px;
+}
+
+/*tables*/
+.table-header {
+  text-align: left;
+}
+
+table {
+  border: rgb(0, 0, 0) solid 1px;
+}
+
+table th {
+  border: rgb(107, 102, 102) solid 1px;
+  background-color: gray;
+}
+
+table td {
+  border: rgb(175, 170, 170) solid 1px;
+  background-color: rgb(240, 229, 229);
+}
+
+tbody tr:hover td {
+  background-color: rgb(236, 235, 144);
+  border: rgb(148, 143, 79) solid 1px;
+}
+
+/*player bio*/
+.player-attributes {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+

@@ -32,12 +32,12 @@ function EditPlayerList() {
                     {players.map((player) => (
                         <tr key={player.id}>
                             <td>
-                                <Link to={`/playerEditPage/${player.id}`}>
+                                <Link to={`/admin/playerEditPage/${player.id}`}>
                                     {player.firstName}
                                 </Link>
                             </td>
                             <td>
-                                <Link to={`/playerEditPage/${player.id}`}>
+                                <Link to={`/admin/playerEditPage/${player.id}`}>
                                     {player.lastName}
                                 </Link>
                             </td>

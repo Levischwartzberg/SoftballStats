@@ -2,20 +2,30 @@ import {Link} from 'react-router-dom';
 
 function Header() {
     return (
-        <header>
-            <Link to="/">
-                Home
-            </Link>
-            <Link to="/players">
-                Players
-            </Link>
-            <Link to="/seasons">
-                Seasons
-            </Link>
-            <Link to="/admin">
-                Admin
-            </Link>
-        </header>
+        <nav className="main-nav">
+            <ul>
+                <li>
+                    <Link to="/">
+                        Home
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/players">
+                        Players
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/seasons">
+                        Seasons
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/admin">
+                        Admin
+                    </Link>
+                </li>
+            </ul>
+        </nav>
     )
 }
 

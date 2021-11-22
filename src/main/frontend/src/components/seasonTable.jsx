@@ -19,7 +19,7 @@ function SeasonTable() {
     
     return (
         <div>
-            <h1>Seasons</h1>
+            <h1 className="table-header">Seasons</h1>
             <table>
                 <tbody>
                     <tr>

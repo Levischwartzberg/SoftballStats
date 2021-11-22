@@ -20,9 +20,20 @@ function PlayerBio(props) {
     return (
         <div>
             <h1>{player.firstName} {player.lastName}</h1>
-            <p>Height: {player.height}</p>
-            <p>Weight: {player.weight}</p>
-            <p>Bats: {player.batHand} Throws: {player.throwHand}</p>
+            <ul className="player-attributes">
+                <li>
+                    <span style={{fontWeight: "bold"}}>Height: </span> {player.height}
+                </li>
+                <li>
+                    <span style={{fontWeight: "bold"}}>Weight: </span> {player.weight}
+                </li>
+                <li>
+                    <span style={{fontWeight: "bold"}}>Bats: </span> {player.batHand}
+                </li>
+                <li>
+                    <span style={{fontWeight: "bold"}}>Throws: </span> {player.throwHand}
+                </li>
+            </ul>
         </div>
     )
 }

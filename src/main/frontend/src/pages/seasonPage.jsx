@@ -6,7 +6,7 @@ function SeasonPage(props) {
 
     return (
         <div>
-            <h1>Results</h1>
+            <h1 className="table-header">Results</h1>
             <ResultsTable seasonId={id}></ResultsTable>
         </div>
     )

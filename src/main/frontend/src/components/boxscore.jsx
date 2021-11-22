@@ -13,7 +13,7 @@ function Boxscore(props) {
 
     return (
         <div>
-            <h3>Boxscore</h3>
+            <h5 style={{fontWeight: "bold"}} className="table-header">Boxscore</h5>
             <table>
                 <tbody>
                     <tr>

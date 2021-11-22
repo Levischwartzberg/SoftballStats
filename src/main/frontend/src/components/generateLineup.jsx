@@ -15,10 +15,18 @@ function GenerateLineup(props) {
     const PlayerDisplay = styled.h6`
         padding: 0.5em;
         margin: 0.5em;
-        border: solid black .05em;
         min-width: 5em;
         display: inline;
     `;
+    const PlusButton = styled.button`
+        border: solid black 1px;
+        border-radius: 5px;
+        margin-right: 10px;
+        font-weight: bold;
+        &:hover {
+            background-color: rgb(211, 209, 97);
+        }
+    `
 
     const [lineup, setLineup] = useState([{lineupSpot: 1}, {lineupSpot: 2}, {lineupSpot: 3}, {lineupSpot: 4}, {lineupSpot: 5} ,{lineupSpot: 6},{lineupSpot: 7}, {lineupSpot: 8},{lineupSpot: 9}])
     const [playerPopup, setPlayerPopup] = useState(false);
@@ -119,7 +127,7 @@ function GenerateLineup(props) {
                                 <td>
                                     <span>
                                         <PlayerDisplay>{spot.lastName + ", " + spot.firstName}</PlayerDisplay>
-                                        <button onClick={(event) => {event.preventDefault(); showPlayerPopup(); relaySpot(spot.lineupSpot);}}>+</button>
+                                        <PlusButton onClick={(event) => {event.preventDefault(); showPlayerPopup(); relaySpot(spot.lineupSpot);}}>+</PlusButton>
                                     </span>
                                 </td>
                                 <td>

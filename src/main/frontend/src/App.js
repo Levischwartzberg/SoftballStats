@@ -22,46 +22,48 @@ function App() {
     <div className="App">
       <Router>
         <Header></Header>
+        <Switch>
+            <Route path="/admin" component={AdminHome} />
+        </Switch>
 
-        <Switch>
-          <Route exact path="/" component={Home} />
-        </Switch>
-        <Switch>
-          <Route path="/players" component={Players} />
-        </Switch>
-        <Switch>
-          <Route path="/seasons" component={Seasons} />
-        </Switch>
-        <Switch>
-          <Route path="/playerPage/:id" component={PlayerPage} />
-        </Switch>
-        <Switch>
-          <Route path="/seasonPage/:id" component={SeasonPage} />
-        </Switch>
-        <Switch>
-          <Route path="/boxscore/:id" component={ResultPage} />
-        </Switch>
-        <Switch>
-          <Route path="/admin" component={AdminHome} />
-        </Switch>
-        <Switch>
-          <Route path="/admin/addPlayer" component={AddPlayer} />
-        </Switch>
-        <Switch>
-          <Route path="/admin/addGame" component={AddGame} />
-        </Switch>
-        <Switch>
-          <Route path="/admin/editPlayer" component={EditPlayer} />
-        </Switch>
-        <Switch>
-          <Route path="/playerEditPage/:id" component={EditPlayerPage} />
-        </Switch>
-        <Switch>
-          <Route path="/admin/editGame" component={EditGame} />
-        </Switch>
-        <Switch>
-          <Route path="/admin/editOneGame/:id" component={EditGamePage} />
-        </Switch>
+        <div className="content">
+          <Switch>
+            <Route exact path="/" component={Home} />
+          </Switch>
+          <Switch>
+            <Route path="/players" component={Players} />
+          </Switch>
+          <Switch>
+            <Route path="/seasons" component={Seasons} />
+          </Switch>
+          <Switch>
+            <Route path="/playerPage/:id" component={PlayerPage} />
+          </Switch>
+          <Switch>
+            <Route path="/seasonPage/:id" component={SeasonPage} />
+          </Switch>
+          <Switch>
+            <Route path="/boxscore/:id" component={ResultPage} />
+          </Switch>
+          <Switch>
+            <Route path="/admin/addPlayer" component={AddPlayer} />
+          </Switch>
+          <Switch>
+            <Route path="/admin/addGame" component={AddGame} />
+          </Switch>
+          <Switch>
+            <Route path="/admin/editPlayer" component={EditPlayer} />
+          </Switch>
+          <Switch>
+            <Route path="/admin/playerEditPage/:id" component={EditPlayerPage} />
+          </Switch>
+          <Switch>
+            <Route path="/admin/editGame" component={EditGame} />
+          </Switch>
+          <Switch>
+            <Route path="/admin/editOneGame/:id" component={EditGamePage} />
+          </Switch>
+        </div>
       </Router>
     </div>
   );

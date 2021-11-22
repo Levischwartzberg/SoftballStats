@@ -21,7 +21,7 @@ function PlayerTable() {
 
     return (
         <div>
-            <h1>
+            <h1 className="table-header">
                 Ballplayers
             </h1>
             <table>
