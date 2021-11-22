@@ -43,8 +43,8 @@ function EditGameList() {
 
     return (
         <div>
-            <Dropdown>
-                <Dropdown.Toggle variant="success" id="dropdown-basic">
+            <Dropdown className="custom-dropdown">
+                <Dropdown.Toggle variant="" id="dropdown-basic">
                     Choose Existing Season
                 </Dropdown.Toggle>
 

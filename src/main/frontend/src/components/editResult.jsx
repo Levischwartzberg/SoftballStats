@@ -81,17 +81,20 @@ function EditResult(props) {
     }
     
     return (
-        <div>
+        <div className="result-form">
             <form action="">
                 <label htmlFor="runsFor">
-                    Runs For
+                    <span style={{fontWeight: "bold"}}> Runs For: </span>
                     <input type="number" value={scoreObj.runsFor} onChange={handleChange} name="runsFor"/>
                 </label>
                 <label htmlFor="runsAgainst">
-                    Runs Against
+                    <span style={{fontWeight: "bold"}}> Runs Against: </span>
                     <input type="number" value={scoreObj.runsAgainst} onChange={handleChange} name="runsAgainst"/>
                 </label>
-                <DateEntry getDate={setDate} currentDate={result.date}></DateEntry>
+                <label htmlFor="dateEntry">
+                    <span style={{fontWeight: "bold"}}> Date: </span>
+                    <DateEntry name="dateEmtry" getDate={setDate} currentDate={result.date}></DateEntry>
+                </label>
             </form>
         </div>
     )

@@ -2,8 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { Dropdown } from "react-bootstrap";
 import API from "../utils/API";
 import AddSeasonPopup from './addSeasonPopup';
+import styled from 'styled-components';
 
 function SeasonForm(props) {
+    const Button = styled.button`
+        border: black solid 1px;
+        margin: 5px;
+        background-color: rgb(107, 102, 102);
+        border-radius: 5px;
+    `
+
     const [seasons, setSeasons] = useState([]);
     const [gameSeason, setGameSeason] = useState({});
     const [seasonForm, setSeasonForm] = useState(false);
@@ -40,14 +48,10 @@ function SeasonForm(props) {
         setSeasonForm(true);
     }
 
-    function tester() {
-        console.log(gameSeason);
-    }
-
     return (
-        <div>
-            <Dropdown>
-                <Dropdown.Toggle variant="success" id="dropdown-basic">
+        <div className="season-form">
+            <Dropdown className="custom-dropdown">
+                <Dropdown.Toggle variant="" id="dropdown-basic">
                     Choose Existing Season
                 </Dropdown.Toggle>
 
@@ -59,11 +63,10 @@ function SeasonForm(props) {
                     ))}
                 </Dropdown.Menu>
             </Dropdown>
-            <button onClick={createSeasonPopup}>Create New Season</button>
+            <Button onClick={createSeasonPopup}>Create New Season</Button>
             {seasonForm === true && (
                 <AddSeasonPopup setGameSeason={setGameSeason} open={seasonForm} seasonForm={setSeasonForm}></AddSeasonPopup>
             )}
-            <button onClick={tester}>tester</button>
             {(gameSeason.session && gameSeason.year) && (
                 <label htmlFor="selected-season">
                     selected season

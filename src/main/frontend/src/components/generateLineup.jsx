@@ -123,7 +123,7 @@ function GenerateLineup(props) {
                         </tr>
                         {lineup.map((spot) => (
                             <tr key={spot.lineupSpot}>
-                                <td>{spot.lineupSpot}</td>
+                                <td style={{textAlign: "center"}}>{spot.lineupSpot}</td>
                                 <td>
                                     <span>
                                         <PlayerDisplay>{spot.lastName + ", " + spot.firstName}</PlayerDisplay>

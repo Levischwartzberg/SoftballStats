@@ -60,7 +60,7 @@ function EditGameLineup(props) {
                     </tr>
                     {lineup.map((playerGame) => (
                         <tr key={playerGame.lineupSpot}>
-                            <td>
+                            <td style={{textAlign: "center"}}>
                                 {playerGame.lineupSpot}
                             </td>
                             <td>

@@ -108,3 +108,35 @@ tbody tr:hover td {
   padding: 0;
 }
 
+/*dropdowns*/
+.custom-dropdown {
+  display: inline-block;
+  border: black solid 1px;
+  border-radius: 5px;
+  background-color: rgb(107, 102, 102);
+  color: black;
+}
+
+.custom-dropdown #dropdown-basic {
+  color: black;
+}
+
+/*season form*/
+.season-form {
+  margin-bottom: 20px;
+}
+
+/*result form*/
+.result-form {
+  margin-bottom: 20px;
+}
+
+/*player form*/
+.player-form label {
+  display: block;
+}
+
+.player-form .player-input {
+  margin-left: 20px;
+}
+

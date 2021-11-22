@@ -54,17 +54,21 @@ function ResultForm(props) {
     }
 
     return (
-        <div>
+        <div className="result-form">
             <form action="">
                 <label htmlFor="runsFor">
-                    Runs For
+                    <span style={{fontWeight: "bold"}}> Runs For: </span>
                     <input type="number" placeholder="0" onChange={handleChange} name="runsFor"/>
                 </label>
                 <label htmlFor="runsAgainst">
-                    Runs Against
+                    <span style={{fontWeight: "bold"}}> Runs Against: </span>
                     <input type="number" placeholder="0" onChange={handleChange} name="runsAgainst"/>
                 </label>
-                <DateEntry getDate={setDate}></DateEntry>
+                <br/>
+                <label htmlFor="dateEntry">
+                    <span style={{fontWeight: "bold"}}> Date: </span>
+                    <DateEntry name="dateEntry" getDate={setDate}></DateEntry>
+                </label>
             </form>
         </div>
     )

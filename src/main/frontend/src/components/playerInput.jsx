@@ -51,37 +51,40 @@ function PlayerInput(props) {
     }
 
     return (
-        <form>
+        <form className="player-form">
             <label htmlFor="firstName">
-                First Name
-                <input onChange={handleChange} placeholder="First Name" type="text" name="firstName" />
+                First Name: 
+                <input className="player-input" onChange={handleChange} placeholder="First Name" type="text" name="firstName" />
             </label>
             <label htmlFor="lastName">
-                Last Name
-                <input onChange={handleChange} placeholder="Last Name" type="text" name="lastName" />
+                Last Name: 
+                <input className="player-input" onChange={handleChange} placeholder="Last Name" type="text" name="lastName" />
             </label>
             <label htmlFor="weight">
-                Weight (lbs)
-                <input onChange={handleChange} placeholder="Weight" type="number" name="weight" min="50" max="500"/>
+                Weight (lbs):
+                <input className="player-input" onChange={handleChange} placeholder="Weight" type="number" name="weight" min="50" max="500"/>
             </label>
             <label htmlFor="height">
-                Height
-                <input onChange={handleHeightChange} value={heightObj.feet} type="number" name="feet" min="4" max="7"/>
-                <input onChange={handleHeightChange} value={heightObj.inches} type="number" name="inches" min="0" max="11"/>
+                Height:
+
+                <span className="player-input">
+                    <input onChange={handleHeightChange} value={heightObj.feet} type="number" name="feet" min="4" max="7"/>
+                    <input onChange={handleHeightChange} value={heightObj.inches} type="number" name="inches" min="0" max="11"/>
+                </span>
             </label>
             <label htmlFor="throwHand">
-                Throwing Hand
+                Throwing Hand:
                 {/* <input onChange={handleChange} placeholder="Throw Hand" type="text" name="throws" /> */}
-                <select id = "dropdown" onClick={handleChange} name="throwHand">
+                <select className="player-input" id = "dropdown" onClick={handleChange} name="throwHand">
                     <option value="Right" disabled={true}>Choose 1</option>
                     <option value="Right">Right</option>
                     <option value="Left">Left</option>
                 </select>
             </label>
             <label htmlFor="batHand">
-                Batting Side
+                Batting Side:
                 {/* <input onChange={handleChange} placeholder="Throw Hand" type="text" name="throws" /> */}
-                <select id = "dropdown" onClick={handleChange} name="batHand">
+                <select className="player-input" id = "dropdown" onClick={handleChange} name="batHand">
                     <option value="Right" disabled={true}>Choose 1</option>
                     <option value="Right">Right</option>
                     <option value="Left">Left</option>
