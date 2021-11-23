@@ -15,7 +15,28 @@ function EditGameList() {
     function loadSeasons() {
         API.getAllSeasons()
             .then((res) => {
-                return res.data;
+                let sortedByYearAndSession = res.data.sort(function(season1, season2) {
+                    let year1 = season1.year;
+                    let year2 = season2.year;
+                    let session1ValueObj = {spring: 0, summer: 1, fall: 2, other: 3};
+                    let session2ValueObj = {spring: 0, summer: 1, fall: 2, other: 3};
+
+                    if(year1 < year2) {
+                        return -1;
+                    }
+                    else if (year1 > year2) {
+                        return 1;
+                    }
+                    else {
+                        if (session1ValueObj[season1.session] <= session2ValueObj[season2.session]) {
+                            return -1;
+                        }
+                        else {
+                            return 1;
+                        }
+                    }
+                })
+                return sortedByYearAndSession;
             })
             .then((seasons) => setSeasons(seasons))
             .catch((err) => console.log(err));
@@ -28,9 +49,24 @@ function EditGameList() {
             })
             .then((season) => {
                 setSeason(season);
-                setGameList(season.resultList)
+                setGameList(sortResultsByDate(season.resultList))
             })
             .catch((error) => console.log(error))
+    }
+
+    function sortResultsByDate(resultList) {
+        let ordered = resultList.sort(function(result1, result2) {
+            let date1 = result1.date;
+            let date2 = result2.date;
+
+            if (date1 < date2) {
+                return -1;
+            }
+            else {
+                return 1;
+            }
+        })
+        return ordered;
     }
 
     function convertDateTime(dateTime) {
