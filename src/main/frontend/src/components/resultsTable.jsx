@@ -17,9 +17,24 @@ function ResultsTable(props) {
             })
             .then((season) => {
                 setSeason(season);
-                setResults(season.resultList)
+                setResults(sortResultsByDate(season.resultList))
             })
             .catch((error) => console.log(error))
+    }
+
+    function sortResultsByDate(resultList) {
+        let ordered = resultList.sort(function(result1, result2) {
+            let date1 = result1.date;
+            let date2 = result2.date;
+
+            if (date1 < date2) {
+                return -1;
+            }
+            else {
+                return 1;
+            }
+        })
+        return ordered;
     }
 
     function convertDateTime(dateTime) {
