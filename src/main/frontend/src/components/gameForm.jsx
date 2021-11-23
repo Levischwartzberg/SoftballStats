@@ -21,19 +21,25 @@ function GameForm() {
 
     function saveGame(event) {
         event.preventDefault();
-        let message = validate();
-        if(message === true) {
+        let message1 = validate();
+        let message2 = validateLineup();
+        if(message1 === true && message2 === true) {
             saveFromBoxscoreVO();
         }
         else {
-            setValidationAlert({open: true, message: message});
+            if (message1 !== true) {
+                setValidationAlert({open: true, message: message1});
+            }
+            else {
+                setValidationAlert({open: true, message: message2});
+            }
         }
     }
 
     function saveFromBoxscoreVO() {
         let adjustedLineup = [];
-        lineup.forEach((player) => {
-            if(player.id) {
+        lineup.forEach((player, index) => {
+            if(player.id && (gameStats[index].atBats > 0 || gameStats[index].walks > 0)) {
                 player.gameList = [];
                 adjustedLineup.push(player);
             }
@@ -57,8 +63,37 @@ function GameForm() {
         .catch((err) => console.log(err));
     }
 
+    function validateLineup() {
+        const errorMessages = [];
+        let runs = 0;
+        gameStats.forEach((statline, index) => {
+            let atBats = parseInt(statline.atBats);
+            let hits = parseInt(statline.hits);
+            let singles = parseInt(statline.singles);
+            let doubles = parseInt(statline.doubles);
+            let triples = parseInt(statline.triples);
+            let homeruns = parseInt(statline.homeruns);
+            if (atBats < hits) {
+                errorMessages.push(`The hits cannot exceed the total at bats. Error first appears in lineup spot ${index+1}.`);
+            }
+            if((singles + doubles + triples + homeruns) !== hits) {
+                errorMessages.push(`The sum of each hit type (1B, 2B, 3B HR) must be equal to the total amount of hits. Error first appears in lineup spot ${index+1}.`);
+            }
+            runs += parseInt(statline.runs);
+        })
+        let runsFor = 0;
+        if(result.score) {
+            runsFor = (result.result === "Win") ? parseInt(result.score.split("-")[0]) : parseInt(result.score.split("-")[1]);
+        }
+        if(runs !== runsFor) {
+            errorMessages.push("The total amount of runs scored (sum of R column) must match the Runs For field.")
+        }
+        errorMessages.push(true);
+        return errorMessages[0];
+    }
+
     function validate() {
-        console.log(result);
+        // console.log(result);
         const playerIds = [];
         lineup.forEach((player) => {
             if(player.id) {

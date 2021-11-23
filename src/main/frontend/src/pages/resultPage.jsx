@@ -27,6 +27,7 @@ function ResultPage() {
 						return 1;
 					}
 				});
+                console.log(sorted);
                 return sorted;
             })
             .then((games) => {setGames(games); setResult(games[0].result)})
