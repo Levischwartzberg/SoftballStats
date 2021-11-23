@@ -59,7 +59,7 @@ function PlayerGameLog(props) {
                     ))}
                 </Dropdown.Menu>
             </Dropdown>
-            <table>
+            {games[0] && (<table>
                 <tbody>
                    <tr>
                        <th>Game</th>
@@ -102,7 +102,7 @@ function PlayerGameLog(props) {
                         </tr>
                    ))}
                 </tbody>
-            </table>
+            </table>)}
         </div>
     )
 }
