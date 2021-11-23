@@ -10,7 +10,7 @@ function GenerateLineup(props) {
         border-radius: 3px;
         width: 50px;
         padding-right: 1px;
-        `;
+    `;
 
     const PlayerDisplay = styled.h6`
         padding: 0.5em;
@@ -26,7 +26,7 @@ function GenerateLineup(props) {
         &:hover {
             background-color: rgb(211, 209, 97);
         }
-    `
+    `;
 
     const [lineup, setLineup] = useState([{lineupSpot: 1}, {lineupSpot: 2}, {lineupSpot: 3}, {lineupSpot: 4}, {lineupSpot: 5} ,{lineupSpot: 6},{lineupSpot: 7}, {lineupSpot: 8},{lineupSpot: 9}])
     const [playerPopup, setPlayerPopup] = useState(false);

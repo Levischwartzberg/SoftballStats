@@ -77,7 +77,7 @@ function GameForm() {
                 errorMessages.push(`The hits cannot exceed the total at bats. Error first appears in lineup spot ${index+1}.`);
             }
             if((singles + doubles + triples + homeruns) !== hits) {
-                errorMessages.push(`The sum of each hit type (1B, 2B, 3B HR) must be equal to the total amount of hits. Error first appears in lineup spot ${index+1}.`);
+                errorMessages.push(`The sum of each hit type (1B, 2B, 3B, HR) must be equal to the total amount of hits. Error first appears in lineup spot ${index+1}.`);
             }
             runs += parseInt(statline.runs);
         })

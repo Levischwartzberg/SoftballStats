@@ -8,9 +8,9 @@ function SeasonForm(props) {
     const Button = styled.button`
         border: black solid 1px;
         margin: 5px;
-        background-color: rgb(107, 102, 102);
+        background-color: var(--darkGray);
         border-radius: 5px;
-    `
+    `;
 
     const [seasons, setSeasons] = useState([]);
     const [gameSeason, setGameSeason] = useState({});
