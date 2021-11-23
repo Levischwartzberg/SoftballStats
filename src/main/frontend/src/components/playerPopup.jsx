@@ -73,11 +73,11 @@ function PlayerPopup(props) {
                 <label htmlFor="chooseExisting">
                     Choose Existing Player
                     <select name="existingPlayer" id="chooseExisting" onClick={choosePlayer}>
-                        <option disabled="true" selected="true">
+                        <option disabled={true} selected={true}>
                             Choose Existing Player 
                         </option>
                         {players.map((player) => (
-                            <option>{player.lastName + ", " + player.firstName}</option>
+                            <option key={player.id}>{player.lastName + ", " + player.firstName}</option>
                         ))}
                     </select>
                 </label>
