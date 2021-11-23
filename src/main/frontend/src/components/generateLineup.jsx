@@ -75,6 +75,7 @@ function GenerateLineup(props) {
 		const { name, id, value } = event.target;
 		let gameStatsCopy = [...gameStats];
         let playerObjCopy = {...gameStats[id-1]}
+        console.log(playerObjCopy);
         playerObjCopy = { ...playerObjCopy, [name]: value };
         gameStatsCopy[id-1] = playerObjCopy;
         setGameStats(gameStatsCopy);
@@ -134,7 +135,7 @@ function GenerateLineup(props) {
                                     <Input onChange={handleChange} id={spot.lineupSpot} value={gameStats[spot.lineupSpot-1].atBats} type="number" name="atBats" min="0" placeholder="0"></Input>
                                 </td>
                                 <td>
-                                    <Input onChange={handleChange} id={spot.lineupSpot} value={gameStats[spot.lineupSpot-1].hits} type="number" name="hits" min="0" max={gameStats[spot.lineupSpot-1].atBats} placeholder="0"></Input>
+                                    <Input onChange={handleChange} id={spot.lineupSpot} value={gameStats[spot.lineupSpot-1].hits} type="number" name="hits" min={parseInt(gameStats[spot.lineupSpot-1].singles) + parseInt(gameStats[spot.lineupSpot-1].doubles) + parseInt(gameStats[spot.lineupSpot-1].triples) + parseInt(gameStats[spot.lineupSpot-1].homeruns)} max={gameStats[spot.lineupSpot-1].atBats} placeholder="0"></Input>
                                 </td>
                                 <td>
                                     <Input onChange={handleChange} id={spot.lineupSpot} value={gameStats[spot.lineupSpot-1].singles} type="number" name="singles" min="0" max={gameStats[spot.lineupSpot-1].hits - gameStats[spot.lineupSpot-1].doubles - gameStats[spot.lineupSpot-1].triples - gameStats[spot.lineupSpot-1].homeruns} placeholder="0"></Input>

@@ -3,7 +3,7 @@ import API from '../utils/API';
 import { useHistory } from 'react-router-dom'
 
 function EditPlayerForm(props) {
-    const [player, setPlayer] = useState({});
+    const [player, setPlayer] = useState({positionList: []});
     const [heightObj, setHeightObj] = useState({});
 
     useEffect(() => {
@@ -24,6 +24,7 @@ function EditPlayerForm(props) {
         API.getPlayerById(props.playerId)
             .then((res) => {
                 let player = res.data;
+                player.gameList = [];
                 return player;
             })
             .then((player) => {
@@ -55,6 +56,7 @@ function EditPlayerForm(props) {
     },[heightObj])
 
     function handleFormSubmit(event) {
+        console.log(player);
         event.preventDefault();
         if (player.firstName) {
             API.updatePlayer(player)

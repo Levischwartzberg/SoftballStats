@@ -41,6 +41,41 @@ function EditGameLineup(props) {
         setLineup(lineupCopy);
 	}
 
+    function calcMaxHits(atBats) {
+        return atBats;
+    }
+
+    function calcMinHits(playerGame) {
+        let singles = parseInt(playerGame.singles);
+        let doubles = parseInt(playerGame.doubles);
+        let triples = parseInt(playerGame.triples);
+        let homeruns = parseInt(playerGame.homeruns);
+        return singles + doubles + triples + homeruns;
+    }
+
+    function calcMaxHitType(playerGame, hitType) {
+        let hits = parseInt(playerGame.hits);
+        let singles = parseInt(playerGame.singles);
+        let doubles = parseInt(playerGame.doubles);
+        let triples = parseInt(playerGame.triples);
+        let homeruns = parseInt(playerGame.homeruns);
+        if(hitType === "singles") {
+            return hits - doubles - triples - homeruns;
+        }
+        if(hitType === "doubles") {
+            return hits - singles - triples - homeruns;
+        }
+        if(hitType === "triples") {
+            return hits - singles - doubles - homeruns;
+        }
+        if(hitType === "homeruns") {
+            return hits - singles - doubles - triples;
+        }
+        else {
+            return hits;
+        }
+    }
+
     return (
         <div>
             <table>
@@ -70,19 +105,19 @@ function EditGameLineup(props) {
                                 <Input onChange={handleChange} value={playerGame.atBats} id={playerGame.lineupSpot} type="number" name="atBats" min="0" placeholder="0"></Input>
                             </td>
                             <td>
-                                <Input onChange={handleChange} value={playerGame.hits} id={playerGame.lineupSpot} type="number" name="hits" min="0" placeholder="0"></Input>
+                                <Input onChange={handleChange} value={playerGame.hits} id={playerGame.lineupSpot} type="number" name="hits" min={calcMinHits(playerGame)} max={calcMaxHits(playerGame.atBats)} placeholder="0"></Input>
                             </td>
                             <td>
-                                <Input onChange={handleChange} value={playerGame.singles} id={playerGame.lineupSpot} type="number" name="singles" min="0" placeholder="0"></Input>
+                                <Input onChange={handleChange} value={playerGame.singles} id={playerGame.lineupSpot} type="number" name="singles" min="0" max={calcMaxHitType(playerGame, "singles")} placeholder="0"></Input>
                             </td>
                             <td>
-                                <Input onChange={handleChange} value={playerGame.doubles} id={playerGame.lineupSpot} type="number" name="doubles" min="0" placeholder="0"></Input>
+                                <Input onChange={handleChange} value={playerGame.doubles} id={playerGame.lineupSpot} type="number" name="doubles" min="0" max={calcMaxHitType(playerGame, "doubles")} placeholder="0"></Input>
                             </td>
                             <td>
-                                <Input onChange={handleChange} value={playerGame.triples} id={playerGame.lineupSpot} type="number" name="triples" min="0" placeholder="0"></Input>
+                                <Input onChange={handleChange} value={playerGame.triples} id={playerGame.lineupSpot} type="number" name="triples" min="0" max={calcMaxHitType(playerGame, "triples")} placeholder="0"></Input>
                             </td>
                             <td>
-                                <Input onChange={handleChange} value={playerGame.homeruns} id={playerGame.lineupSpot} type="number" name="homeruns" min="0" placeholder="0"></Input>
+                                <Input onChange={handleChange} value={playerGame.homeruns} id={playerGame.lineupSpot} type="number" name="homeruns" min="0" max={calcMaxHitType(playerGame, "homeruns")} placeholder="0"></Input>
                             </td>
                             <td>
                                 <Input onChange={handleChange} value={playerGame.walks} id={playerGame.lineupSpot} type="number" name="walks" min="0" placeholder="0"></Input>
