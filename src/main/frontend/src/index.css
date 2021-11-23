@@ -148,3 +148,11 @@ tbody tr:hover td {
   margin-left: 20px;
 }
 
+/*results dropdown*/
+.results-dropdown {
+  background-color: white;
+  display: inline-block;
+  position: absolute;
+  border: solid 1px black;
+}
+
