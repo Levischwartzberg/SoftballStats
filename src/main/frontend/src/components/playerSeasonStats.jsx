@@ -5,7 +5,7 @@ function PlayerSeasonStats(props) {
     const [seasonStats, setSeasonStats] = useState([]);
     useEffect(() => {
         loadSeasonStats();
-    }, [])
+    }, [props.playerId])
 
     function loadSeasonStats() {
         API.getSeasonStatsForPlayer(props.playerId)

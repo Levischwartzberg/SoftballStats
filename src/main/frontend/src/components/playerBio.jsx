@@ -5,7 +5,7 @@ function PlayerBio(props) {
     const [player, setPlayer] = useState({});
     useEffect(() => {
         loadPlayer();
-    },[])
+    },[props.playerId])
 
     function loadPlayer() {
         API.getPlayerById(props.playerId)

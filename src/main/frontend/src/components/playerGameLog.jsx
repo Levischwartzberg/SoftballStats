@@ -8,7 +8,8 @@ function PlayerGameLog(props) {
     const [seasons, setSeasons] = useState([]);
     useEffect(() => {
         loadSeasons();
-    }, [])
+        setGames([]);
+    }, [props.playerId])
 
     function loadGames(seasonId) {
         API.getGameLogBySeason(props.playerId, seasonId)

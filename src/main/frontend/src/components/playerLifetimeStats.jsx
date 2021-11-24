@@ -5,7 +5,7 @@ function PlayerLifetimeStats(props) {
     const [stats, setStats] = useState({});
     useEffect(() => {
         loadLifetimeStats();
-    },[])
+    },[props.playerId])
 
     function loadLifetimeStats() {
         API.getLifetimeStatsForPlayer(props.playerId)
