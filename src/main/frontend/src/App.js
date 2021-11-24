@@ -16,19 +16,28 @@ import EditPlayer from './pages/editPlayer';
 import EditPlayerPage from './pages/editPlayerPage';
 import EditGame from './pages/editGame';
 import EditGamePage from './pages/editGamePage';
+import { useState, useEffect } from 'react';
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    console.log(isAuthenticated);
+  },[isAuthenticated])
+
   return (
     <div className="App">
       <Router>
-        <Header></Header>
+        <Header auth={isAuthenticated}></Header>
         <Switch>
             <Route path="/admin" component={AdminHome} />
         </Switch>
 
         <div className="content">
           <Switch>
-            <Route exact path="/" component={Home} />
+            <Route exact path="/">
+              <Home setIsAuthenticated={setIsAuthenticated}/>
+            </Route>
           </Switch>
           <Switch>
             <Route path="/players" component={Players} />

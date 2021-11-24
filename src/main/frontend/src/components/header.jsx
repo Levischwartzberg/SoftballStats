@@ -3,7 +3,7 @@ import {useEffect, useState} from 'react';
 import DropDownSearchLinks from './dropDownSearchLinks';
 import API from '../utils/API';
 
-function Header() {
+function Header(props) {
     const [searchText, setSearchText] = useState("");
     const [dropdown, setDropdown] = useState(false);
     const [results, setResults] = useState([]);
@@ -66,11 +66,13 @@ function Header() {
                         Seasons
                     </Link>
                 </li>
-                <li>
-                    <Link to="/admin">
-                        Admin
-                    </Link>
-                </li>
+                {props.auth === true && (
+                    <li>
+                        <Link to="/admin">
+                            Admin
+                        </Link>
+                    </li>
+                )}
                 <label htmlFor="searchInput">
                     Search Player
                 </label>

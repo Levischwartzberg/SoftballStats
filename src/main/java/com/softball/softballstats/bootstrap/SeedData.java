@@ -1,11 +1,9 @@
 package com.softball.softballstats.bootstrap;
 
+import com.softball.softballstats.domain.*;
+import com.softball.softballstats.services.AccountService;
 import com.softball.softballstats.utils.DateUtils;
 
-import com.softball.softballstats.domain.Game;
-import com.softball.softballstats.domain.Player;
-import com.softball.softballstats.domain.Result;
-import com.softball.softballstats.domain.Season;
 import com.softball.softballstats.services.PlayerService;
 import com.softball.softballstats.services.ResultService;
 import com.softball.softballstats.services.SeasonService;
@@ -21,10 +19,12 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent>{
 
     PlayerService playerService;
     SeasonService seasonService;
+    AccountService accountService;
 
-    public SeedData(PlayerService playerService, SeasonService seasonService) {
+    public SeedData(PlayerService playerService, SeasonService seasonService, AccountService accountService) {
         this.playerService = playerService;
         this.seasonService = seasonService;
+        this.accountService = accountService;
     }
 
     @Override
@@ -112,5 +112,12 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent>{
         playerService.savePlayer(player2);
         seasonService.saveSeason(season1);
         seasonService.saveSeason(season2);
+
+        Account adminAccount = new Account();
+        adminAccount.setUsername("admin");
+        adminAccount.setPassword("qwe123");
+        adminAccount.setRole("admin");
+
+        accountService.saveAccount(adminAccount);
     }
 }

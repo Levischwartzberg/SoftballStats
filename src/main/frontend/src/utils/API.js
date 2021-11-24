@@ -2,6 +2,10 @@ import axios from './axios';
 
 export default {
 
+  login: function(account) {
+    return axios.post("/login/", account)
+  },
+
   getPlayers: function() {
     // const url = 'http://localhost:9091';
     return axios.get("/api/player/");
