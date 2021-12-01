@@ -44,7 +44,6 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             String jwt = parseJwt(request);
             if (jwt != null && jwtTokenUtil.validateJwtToken(jwt)) {
                 String username = jwtTokenUtil.getUserNameFromJwtToken(jwt);
-                System.out.println(username);
 
                 List<GrantedAuthority> AUTHORITIES = new ArrayList<>();
                 AUTHORITIES.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
@@ -67,10 +66,8 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 
     private String parseJwt(HttpServletRequest request) {
         String header = request.getHeader(HttpHeaders.AUTHORIZATION);
-        System.out.println(header);
 
         if(StringUtils.hasText(header) && header.startsWith("Bearer ")) {
-            System.out.println(header.substring(7, header.length()));
             return header.substring(7, header.length());
         }
         return null;

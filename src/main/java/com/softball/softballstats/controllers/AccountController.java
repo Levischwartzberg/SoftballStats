@@ -53,8 +53,6 @@ public class AccountController {
 
             final String token = jwtUtils.generateJwtToken(authReq);
 
-            System.out.println(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
-
             return (SecurityContextHolder.getContext().getAuthentication().isAuthenticated() ) ?
                 ResponseEntity.ok(new JwtResponse(token, account1.getUsername(), account1.getId(), true)) : ResponseEntity.ok("Not authorized");
         } catch (Exception e) {

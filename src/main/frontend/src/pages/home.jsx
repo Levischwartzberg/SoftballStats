@@ -6,14 +6,10 @@ function Home(props) {
         props.setIsAuthenticated(result);
     }
 
-    function setCurrentUser(user) {
-        props.setCurrentUser(user);
-    }
-
     return (
         <div>
             <h1>Welcome to Softball Reference</h1>
-            <LoginForm doAuth={doAuth} setCurrentUser={setCurrentUser}></LoginForm>
+            <LoginForm doAuth={doAuth}></LoginForm>
         </div>
     )
 }

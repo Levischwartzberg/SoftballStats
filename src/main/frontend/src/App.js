@@ -19,16 +19,11 @@ import EditGamePage from './pages/editGamePage';
 import { useState, useEffect } from 'react';
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [currentUser, setCurrentUser] = useState({});
+  const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem("user") !== "");
 
   useEffect(() => {
     console.log(isAuthenticated);
   },[isAuthenticated])
-
-  useEffect(() => {
-    console.log(currentUser);
-  },[currentUser])
 
   return (
     <div className="App">
@@ -41,7 +36,7 @@ function App() {
         <div className="content">
           <Switch>
             <Route exact path="/">
-              <Home setIsAuthenticated={setIsAuthenticated} setCurrentUser={setCurrentUser}/>
+              <Home setIsAuthenticated={setIsAuthenticated}/>
             </Route>
           </Switch>
           <Switch>
