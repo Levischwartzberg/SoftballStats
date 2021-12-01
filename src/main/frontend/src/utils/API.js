@@ -27,7 +27,7 @@ export default {
   },
 
   updatePlayer: function(playerData) {
-    return axios.put("/api/player/", playerData);
+    return axios.put("/api/player/", playerData, {headers: createAuthHeader()});
   },
 
   getGamesByPlayer: function(playerId) {
@@ -59,22 +59,22 @@ export default {
   },
 
   addSeason: function(seasonData) {
-    return axios.post("/api/season/", seasonData);
+    return axios.post("/api/season/", seasonData, {headers: createAuthHeader()});
   },
 
   updateSeason: function(seasonData) {
-    return axios.put("/api/season/", seasonData);
+    return axios.put("/api/season/", seasonData, {headers: createAuthHeader()});
   },
 
   saveNewFromSingleGameBoxscore: function(boxscoreVO) {
-    return axios.put("/api/boxscoreVO/", boxscoreVO);
+    return axios.put("/api/boxscoreVO/", boxscoreVO, {headers: createAuthHeader()});
   },
 
   updateExistingFromSingleGameBoxscore: function(boxscoreVO, seasonId) {
-    return axios.put(`api/boxscoreVO/${seasonId}`, boxscoreVO);
+    return axios.put(`api/boxscoreVO/${seasonId}`, boxscoreVO, {headers: createAuthHeader()});
   },
 
   deleteResultAndGames: function(seasonId, resultId) {
-    return axios.delete(`/api/boxscoreVO/seasonId/${seasonId}/resultId/${resultId}`);
+    return axios.delete(`/api/boxscoreVO/seasonId/${seasonId}/resultId/${resultId}`, {headers: createAuthHeader()});
   }
 }
