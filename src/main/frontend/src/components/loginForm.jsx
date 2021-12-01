@@ -9,16 +9,19 @@ function LoginForm(props) {
         setAccount({ ...account, [name]: value });
     }
 
-    function doTheThing(event) {
+    function performLogin(event) {
         event.preventDefault();
         API.login(account)
             .then((res) => {
-                if(res.data === "hasAdminPrivileges") {
+                props.setCurrentUser(res.data);
+                if(res.data.admin) {
+                    localStorage.setItem("user", JSON.stringify(res.data));
                     console.log("hasAdminPrivileges");
                     props.doAuth(true);
                 }
-                else {
-                    console.log(res.data);
+                else{
+                    console.log("test");
+                    localStorage.setItem("user", "");
                 }
                 setAccount({username: "", password: ""});
             })
@@ -35,7 +38,7 @@ function LoginForm(props) {
                 Password: 
                 <input type="password" name="password" onChange={handleChange} value={account.password}/>
             </label>
-            <button onClick={doTheThing}>Login</button>
+            <button onClick={performLogin}>Login</button>
         </div>
     )
 }

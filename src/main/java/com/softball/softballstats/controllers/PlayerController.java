@@ -8,6 +8,7 @@ import com.softball.softballstats.services.PlayerService;
 import com.softball.softballstats.services.SeasonService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,11 +31,13 @@ public class PlayerController {
 
     @PostMapping("/")
     public ResponseEntity<Player> addPlayer(@RequestBody Player player) {
+        System.out.println(SecurityContextHolder.getContext().getAuthentication());
         return new ResponseEntity<>(playerService.savePlayer(player), HttpStatus.CREATED);
     }
 
     @PutMapping("/")
     public ResponseEntity<Player> updatePlayer(@RequestBody Player player) {
+        System.out.println(SecurityContextHolder.getContext().getAuthentication());
         Player updatedPlayer = playerService.findPlayerById(player.getId()).get();
         updatedPlayer.setFirstName(player.getFirstName());
         updatedPlayer.setLastName(player.getLastName());

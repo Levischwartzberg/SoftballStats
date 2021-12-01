@@ -1,5 +1,11 @@
 import axios from './axios';
 
+function createAuthHeader() {
+  if(localStorage.getItem("user") !== "") {
+    return {Authorization: "Bearer " + JSON.parse(localStorage.getItem("user")).jwtToken};
+  }
+}
+  
 export default {
 
   login: function(account) {
@@ -17,7 +23,7 @@ export default {
   },
 
   addPlayer: function(playerData) {
-      return axios.post("/api/player/", playerData);
+      return axios.post("/api/player/", playerData, {headers: createAuthHeader()});
   },
 
   updatePlayer: function(playerData) {

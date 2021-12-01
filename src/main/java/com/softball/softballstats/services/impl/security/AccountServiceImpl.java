@@ -1,6 +1,6 @@
-package com.softball.softballstats.services.impl;
+package com.softball.softballstats.services.impl.security;
 
-import com.softball.softballstats.domain.Account;
+import com.softball.softballstats.domain.security.Account;
 import com.softball.softballstats.repositories.AccountRepo;
 import com.softball.softballstats.services.AccountService;
 import org.springframework.stereotype.Service;
@@ -14,6 +14,11 @@ public class AccountServiceImpl implements AccountService {
 
     public AccountServiceImpl(AccountRepo accountRepo) {
         this.accountRepo = accountRepo;
+    }
+
+    @Override
+    public Optional<Account> findAccountByUsername(String username) {
+        return accountRepo.findAccountByUsername(username);
     }
 
     @Override

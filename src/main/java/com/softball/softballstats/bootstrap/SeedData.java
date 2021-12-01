@@ -1,17 +1,17 @@
 package com.softball.softballstats.bootstrap;
 
 import com.softball.softballstats.domain.*;
+import com.softball.softballstats.domain.security.Account;
+import com.softball.softballstats.domain.security.Role;
 import com.softball.softballstats.services.AccountService;
 import com.softball.softballstats.utils.DateUtils;
 
 import com.softball.softballstats.services.PlayerService;
-import com.softball.softballstats.services.ResultService;
 import com.softball.softballstats.services.SeasonService;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Component
@@ -116,7 +116,15 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent>{
         Account adminAccount = new Account();
         adminAccount.setUsername("admin");
         adminAccount.setPassword("qwe123");
-        adminAccount.setRole("admin");
+
+        Role role = new Role();
+        role.setRole("admin");
+
+        HashSet<Role> roles = new HashSet<>();
+
+        roles.add(role);
+
+        adminAccount.setRoles(roles);
 
         accountService.saveAccount(adminAccount);
     }
