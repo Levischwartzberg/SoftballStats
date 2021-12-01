@@ -4,23 +4,23 @@ function AdminMenu() {
 
     return (
         <nav className="admin-menu">
-            <ul>
-                <li>
+            <ul className="nav-ul">
+                <li className="nav-li">
                     <Link to="/admin/addPlayer">
                         Add Player
                     </Link>
                 </li>
-                <li>
+                <li className="nav-li">
                     <Link to="/admin/editPlayer">
                         Edit Player
                     </Link>
                 </li>
-                <li>
+                <li className="nav-li">
                     <Link to="/admin/addGame">
                         Add Game
                     </Link>
                 </li>
-                <li>
+                <li className="nav-li">
                     <Link to="/admin/editGame">
                         Edit Game
                     </Link>

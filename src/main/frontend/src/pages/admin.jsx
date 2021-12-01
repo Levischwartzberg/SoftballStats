@@ -2,9 +2,7 @@ import AdminMenu from "../components/adminMenu";
 
 function AdminHome() {
     return (
-        <div>
-            <AdminMenu></AdminMenu>
-        </div>
+        <AdminMenu></AdminMenu>
     )
 }
 export default AdminHome;

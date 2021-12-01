@@ -26,28 +26,44 @@ code {
 }
 
 /*navbars*/
-.main-nav ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
+.main-nav {
+  height: 50px;
   background-color: var(--lightGray);
 }
 
-.main-nav ul li {
+.main-nav ul {
   float: left;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
-.main-nav ul li a {
-  display: block;
+.main-nav ul li.nav-li {
+  display: inline-block;
+  padding-top: 12px;
+}
+
+.main-nav div.nav-li-search{
+  float: right;
+  padding-right: 20px;
+  padding-top: 10px;
+}
+
+.main-nav ul.nav-ul li.nav-li a {
   color: rgb(0, 0, 0);
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
 }
 
-.main-nav ul li a:hover {
-  display: block;
+.main-nav div.nav-li-search a {
+  color: rgb(0, 0, 0);
+  text-align: left;
+  padding: 2px 15px;
+  text-decoration: none;
+}
+
+.main-nav ul.nav-ul li.nav-li a:hover {
   color: rgb(63, 3, 3);
   text-align: center;
   padding: 14px 16px;
@@ -55,30 +71,30 @@ code {
 
 .admin-menu {
   margin-bottom: 30px;
-}
-
-.admin-menu ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
+  height: 50px;
   background-color: var(--darkGray);
 }
 
-.admin-menu ul li {
+.admin-menu ul {
   float: left;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+} 
+
+.admin-menu ul.nav-ul li.nav-li{
+  display: inline-block;
+  padding-top: 12px;
 }
 
-.admin-menu ul li a {
-  display: block;
+.admin-menu ul.nav-ul li.nav-li a {
   color: rgb(0, 0, 0);
   text-align: center;
   padding: 10px 10px;
   text-decoration: none;
 }
 
-.admin-menu ul li a:hover {
-  display: block;
+.admin-menu ul.nav-ul li.nav-li a:hover {
   color: rgb(41, 25, 25);
   text-align: center;
   padding: 10px 10px;
@@ -149,10 +165,28 @@ tbody tr:hover td {
 }
 
 /*results dropdown*/
-.results-dropdown {
+.results-dropdown ul {
+  list-style-type: none;
+  display: block;
+  border: black solid 1px;
   background-color: white;
-  display: inline-block;
+  padding: 0px;
+}
+
+.results-dropdown ul li {
+  margin: 0px;
+  padding: 0px;
+  text-align: left;
+}
+
+.results-dropdown {
+  /* width: 78%; */
   position: absolute;
-  border: solid 1px black;
+  left: 98px;
+}
+
+.nav-li-search {
+  position: relative;
+  z-index: 1200;
 }
 

@@ -50,37 +50,39 @@ function Header(props) {
 
     return (
         <nav className="main-nav">
-            <ul>
-                <li>
+            <ul className="nav-ul">
+                <li className="nav-li">
                     <Link to="/">
                         Home
                     </Link>
                 </li>
-                <li>
+                <li className="nav-li">
                     <Link to="/players">
                         Players
                     </Link>
                 </li>
-                <li>
+                <li className="nav-li">
                     <Link to="/seasons">
                         Seasons
                     </Link>
                 </li>
                 {props.auth === true && (
-                    <li>
+                    <li className="nav-li">
                         <Link to="/admin">
                             Admin
                         </Link>
                     </li>
                 )}
+            </ul>
+            <div className="nav-li-search">
                 <label htmlFor="searchInput">
                     Search Player
                 </label>
-                <input type="text" onChange={handleChange} value={searchText} name="searchInput"/>
+                <input className="player-search" type="text" onChange={handleChange} value={searchText} name="searchInput"/>
                 {dropdown === true && (
-                    <DropDownSearchLinks results={results} setSearchText={setSearchText}></DropDownSearchLinks>
+                    <DropDownSearchLinks classname="results-dropdown" results={results} setSearchText={setSearchText}></DropDownSearchLinks>
                 )}
-            </ul>
+            </div>
         </nav>
     )
 }
