@@ -1,8 +1,9 @@
 {
   "name": "frontend",
   "version": "0.1.0",
+  "homepage": ".",
   "private": true,
-  "proxy": "http://localhost:9091",
+  "proxy": "http://ec2-18-191-5-157.us-east-2.compute.amazonaws.com:9091",
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
