@@ -7,6 +7,6 @@ public class WebConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**").allowedOrigins("http://localhost:3000").allowedMethods("GET", "POST");
+        registry.addMapping("/**").allowedOrigins("http://localhost:3000", "http://softball-stats-bucket.s3.us-east-2.amazonaws.com").allowedMethods("GET", "POST");
     }
 }

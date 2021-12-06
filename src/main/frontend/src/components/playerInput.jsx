@@ -75,7 +75,7 @@ function PlayerInput(props) {
             <label htmlFor="throwHand">
                 Throwing Hand:
                 {/* <input onChange={handleChange} placeholder="Throw Hand" type="text" name="throws" /> */}
-                <select className="player-input" id = "dropdown" onClick={handleChange} name="throwHand">
+                <select className="player-input" id = "dropdown" onChange={handleChange} name="throwHand">
                     <option value="Right" disabled={true}>Choose 1</option>
                     <option value="Right">Right</option>
                     <option value="Left">Left</option>
@@ -84,7 +84,7 @@ function PlayerInput(props) {
             <label htmlFor="batHand">
                 Batting Side:
                 {/* <input onChange={handleChange} placeholder="Throw Hand" type="text" name="throws" /> */}
-                <select className="player-input" id = "dropdown" onClick={handleChange} name="batHand">
+                <select className="player-input" id = "dropdown" onChange={handleChange} name="batHand">
                     <option value="Right" disabled={true}>Choose 1</option>
                     <option value="Right">Right</option>
                     <option value="Left">Left</option>

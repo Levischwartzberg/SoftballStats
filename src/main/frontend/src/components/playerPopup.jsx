@@ -43,8 +43,9 @@ function PlayerPopup(props) {
 
     function choosePlayer(event) {
         let playerName = event.target.value;
+        console.log(playerName);
         players.forEach(player => {
-            if(playerName === player.lastName + ", " + player.firstName) {
+            if(playerName.trim() === (player.lastName + ", " + player.firstName).trim()) {
                 setPlayerObj(player);
             }
         })
@@ -91,7 +92,7 @@ function PlayerPopup(props) {
                 <button onClick={closeModal}>X</button>
                 <label htmlFor="chooseExisting">
                     Choose Existing Player
-                    <select name="existingPlayer" id="chooseExisting" onClick={choosePlayer}>
+                    <select name="existingPlayer" id="chooseExisting" onChange={choosePlayer}>
                         <option disabled={true} selected={true}>
                             Choose Existing Player 
                         </option>
