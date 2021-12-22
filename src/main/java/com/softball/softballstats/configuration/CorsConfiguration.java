@@ -13,7 +13,7 @@ public class CorsConfiguration {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("http://localhost:3000", "http://softball-stats-bucket.s3.us-east-2.amazonaws.com")
+                registry.addMapping("/**").allowedOrigins("http://localhost:3000", "https://softball-stats-bucket.s3.us-east-2.amazonaws.com")
                         .allowedMethods("POST", "PUT", "GET", "DELETE");
             }
         };
