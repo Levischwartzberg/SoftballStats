@@ -4,7 +4,7 @@ import API from "../utils/API";
 function LoginForm(props) {
     const [account, setAccount] = useState({});
     const [loginVisible, setLoginVisible] = useState(false);
-    const [buttonText, setButtonText] = useState(localStorage.getItem("user") !== "" ? "Logout" : "Admin Login");
+    const [buttonText, setButtonText] = useState((localStorage.getItem("user") !== "" && localStorage.getItem("user") !== null) ? "Logout" : "Admin Login");
 
     function handleChange(event) {
         const {name, value} = event.target;

@@ -19,7 +19,7 @@ import EditGamePage from './pages/editGamePage';
 import { useState, useEffect } from 'react';
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem("user") !== "");
+  const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem("user") !== null &&localStorage.getItem("user") !== "");
 
   useEffect(() => {
     console.log(isAuthenticated);
