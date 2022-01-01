@@ -28,14 +28,16 @@ function LoginForm(props) {
                 if(res.data.admin) {
                     localStorage.setItem("user", JSON.stringify(res.data));
                     props.doAuth(true);
+                    setLoginVisible(false);
+                    setButtonText("Logout");
                 }
                 else{
                     localStorage.setItem("user", "");
                     props.doAuth(false);
+                    alert("Invalid Credentials!");
+                    setLoginVisible(true);
                 }
                 setAccount({username: "", password: ""});
-                setLoginVisible(false);
-                setButtonText("Logout");
             })
             .catch((err) => console.log(err))
     }

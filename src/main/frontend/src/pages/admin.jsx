@@ -1,8 +1,8 @@
 import AdminMenu from "../components/adminMenu";
 
-function AdminHome() {
+function AdminHome(props) {
     return (
-        <AdminMenu></AdminMenu>
+        <AdminMenu logout={props.logout}></AdminMenu>
     )
 }
 export default AdminHome;

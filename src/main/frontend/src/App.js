@@ -16,10 +16,14 @@ import EditPlayer from './pages/editPlayer';
 import EditPlayerPage from './pages/editPlayerPage';
 import EditGame from './pages/editGame';
 import EditGamePage from './pages/editGamePage';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem("user") !== null &&localStorage.getItem("user") !== "");
+  const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem("user") !== null && localStorage.getItem("user") !== "");
+
+  function logout() {
+    setIsAuthenticated(false);
+  }
 
   useEffect(() => {
     console.log(isAuthenticated);
@@ -30,7 +34,9 @@ function App() {
       <Router>
         <Header auth={isAuthenticated}></Header>
         <Switch>
-            <Route path="/admin" component={AdminHome} />
+            <Route exact path="/admin" >
+              <AdminHome logout={logout}></AdminHome>
+            </Route>
         </Switch>
 
         <div className="content">
