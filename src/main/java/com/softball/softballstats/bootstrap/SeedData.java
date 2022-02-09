@@ -113,19 +113,19 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent>{
         seasonService.saveSeason(season1);
         seasonService.saveSeason(season2);
 
-        Account adminAccount = new Account();
-        adminAccount.setUsername("admin");
-        adminAccount.setPassword("qwe123");
-
-        Role role = new Role();
-        role.setRole("admin");
-
-        HashSet<Role> roles = new HashSet<>();
-
-        roles.add(role);
-
-        adminAccount.setRoles(roles);
-
-        accountService.saveAccount(adminAccount);
+//        Account adminAccount = new Account();
+//        adminAccount.setUsername("admin");
+//        adminAccount.setPassword("qwe123");
+//
+//        Role role = new Role();
+//        role.setRole("admin");
+//
+//        HashSet<Role> roles = new HashSet<>();
+//
+//        roles.add(role);
+//
+//        adminAccount.setRoles(roles);
+//
+//        accountService.saveAccount(adminAccount);
     }
 }
