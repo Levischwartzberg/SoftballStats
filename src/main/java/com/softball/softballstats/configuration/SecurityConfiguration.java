@@ -32,7 +32,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     //to allow h2 access for development
     @Override
-    @Profile("dev")
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
