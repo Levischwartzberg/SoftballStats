@@ -1,9 +1,7 @@
 package com.softball.softballstats.controllers;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.softball.softballstats.domain.Game;
-import com.softball.softballstats.domain.LifetimeStats;
-import com.softball.softballstats.domain.SeasonStats;
+import com.softball.softballstats.domain.*;
 import com.softball.softballstats.services.GameService;
 import com.softball.softballstats.services.SeasonService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,9 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/seasonStats")
@@ -33,38 +29,83 @@ public class SeasonStatsController {
         return computeSeasonStatsByPlayer(gameList);
     }
 
+    @GetMapping("/team/{seasonId}")
+    public Iterable<SeasonStats> getAllPlayersStatsBySeason(@PathVariable Integer seasonId) {
+        List<SeasonStats> seasonStatsList = new ArrayList<>();
+        Season season = seasonService.findSeasonById(seasonId).get();
+        Map<Integer, SeasonStats> seasonStatsMap = new HashMap<>();
+        for(Result result : season.getResultList()) {
+            List<Game> gameList = result.getGamesList();
+            System.out.println("Games in Result " + gameList.size());
+            for(Game game : gameList) {
+                Integer playerId = game.getPlayer().getId();
+                game.prepareObject();
+                if(!seasonStatsMap.containsKey(playerId)) {
+                    SeasonStats newSeasonStats = new SeasonStats();
+
+                    newSeasonStats.initializeCountingStatsWithZero();
+                    newSeasonStats = incrementSeasonStats(newSeasonStats, game);
+
+                    seasonStatsMap.put(playerId, newSeasonStats);
+                } else {
+                    SeasonStats prevSeasonStats = seasonStatsMap.get(playerId);
+
+                    prevSeasonStats = incrementSeasonStats(prevSeasonStats, game);
+                    seasonStatsMap.put(playerId, prevSeasonStats);
+                }
+            }
+        }
+        for(SeasonStats statline : seasonStatsMap.values()) {
+            seasonStatsList.add(statline);
+        }
+        return seasonStatsList;
+    }
+
     //region Custom Methods
     public Iterable<SeasonStats> computeSeasonStatsByPlayer(List<Game> gameList) {
         HashMap<Integer, SeasonStats> seasonHash = new HashMap<>();
         for(Game game: gameList) {
             Integer seasonId = game.getResult().getSeason().getId();
+            Season season = seasonService.findSeasonById(seasonId).get();
             SeasonStats seasonStats = new SeasonStats();
             if(!seasonHash.containsKey(seasonId)) {
                 seasonStats.initializeCountingStatsWithZero();
-                seasonHash.put(game.getResult().getSeason().getId(), seasonStats);
+                seasonStats.setSeason(season);
+                seasonHash.put(seasonId, seasonStats);
             }
-            seasonStats.setGames(seasonHash.get(seasonId).getGames() + 1);
-            seasonStats.setAtBats(seasonHash.get(seasonId).getAtBats() + game.getAtBats());
-            seasonStats.setHits(seasonHash.get(seasonId).getHits() + game.getHits());
-            seasonStats.setSingles(seasonHash.get(seasonId).getSingles() + game.getSingles());
-            seasonStats.setDoubles(seasonHash.get(seasonId).getDoubles() + game.getDoubles());
-            seasonStats.setTriples(seasonHash.get(seasonId).getTriples() + game.getTriples());
-            seasonStats.setHomeruns(seasonHash.get(seasonId).getHomeruns() + game.getHomeruns());
-            seasonStats.setWalks(seasonHash.get(seasonId).getWalks() + game.getWalks());
-            seasonStats.setRuns(seasonHash.get(seasonId).getRuns() + game.getRuns());
-            seasonStats.setRbi(seasonHash.get(seasonId).getRbi() + game.getRbi());
-            seasonStats.setSeason(seasonService.findSeasonById(seasonId).get());
-            seasonStats.setPlayer(game.getPlayer());
 
-            seasonStats.setAvg(calculateAVG(seasonStats.getHits(), seasonStats.getAtBats()));
-            seasonStats.setObp(calculateOBP(seasonStats.getHits(), seasonStats.getAtBats(), seasonStats.getWalks()));
-            seasonStats.setSlg(calculateSLG(seasonStats.getSingles(), seasonStats.getDoubles(), seasonStats.getTriples(), seasonStats.getHomeruns(), seasonStats.getAtBats()));
-            seasonStats.setOps(calculateOPS(seasonStats.getObp(), seasonStats.getSlg()));
+            seasonStats = incrementSeasonStats(seasonHash.get(seasonId), game);
 
             seasonHash.put(game.getResult().getSeason().getId(), seasonStats);
         }
 
         return new ArrayList<SeasonStats>(seasonHash.values());
+    }
+
+    public SeasonStats incrementSeasonStats(SeasonStats ogSznStats, Game newGame) {
+        SeasonStats seasonStats = new SeasonStats();
+        seasonStats.setPlayer(newGame.getPlayer());
+        seasonStats.setSeason(ogSznStats.getSeason());
+
+        seasonStats.setGames(ogSznStats.getGames() + 1);
+        seasonStats.setAtBats(ogSznStats.getAtBats() + newGame.getAtBats());
+        seasonStats.setHits(ogSznStats.getHits() + newGame.getHits());
+        seasonStats.setSingles(ogSznStats.getSingles() + newGame.getSingles());
+        seasonStats.setDoubles(ogSznStats.getDoubles() + newGame.getDoubles());
+        seasonStats.setTriples(ogSznStats.getTriples() + newGame.getTriples());
+        seasonStats.setHomeruns(ogSznStats.getHomeruns() + newGame.getHomeruns());
+        seasonStats.setWalks(ogSznStats.getWalks() + newGame.getWalks());
+        seasonStats.setRuns(ogSznStats.getRuns() + newGame.getRuns());
+        seasonStats.setRbi(ogSznStats.getRbi() + newGame.getRbi());
+        seasonStats.setSeason(ogSznStats.getSeason());
+        seasonStats.setPlayer(newGame.getPlayer());
+
+        seasonStats.setAvg(calculateAVG(seasonStats.getHits(), seasonStats.getAtBats()));
+        seasonStats.setObp(calculateOBP(seasonStats.getHits(), seasonStats.getAtBats(), seasonStats.getWalks()));
+        seasonStats.setSlg(calculateSLG(seasonStats.getSingles(), seasonStats.getDoubles(), seasonStats.getTriples(), seasonStats.getHomeruns(), seasonStats.getAtBats()));
+        seasonStats.setOps(calculateOPS(seasonStats.getObp(), seasonStats.getSlg()));
+
+        return seasonStats;
     }
 
     public static double calculateAVG(Integer hits, Integer atBats) {

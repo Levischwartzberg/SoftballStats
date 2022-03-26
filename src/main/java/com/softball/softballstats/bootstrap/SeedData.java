@@ -9,6 +9,7 @@ import com.softball.softballstats.utils.DateUtils;
 import com.softball.softballstats.services.PlayerService;
 import com.softball.softballstats.services.SeasonService;
 import org.springframework.context.ApplicationListener;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
@@ -28,6 +29,7 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent>{
     }
 
     @Override
+    @Profile("dev")
     public void onApplicationEvent(ContextRefreshedEvent event) {
 
 //        Season season1 = new Season();
@@ -113,19 +115,19 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent>{
 //        seasonService.saveSeason(season1);
 //        seasonService.saveSeason(season2);
 
-//        Account adminAccount = new Account();
-//        adminAccount.setUsername("admin");
-//        adminAccount.setPassword("qwe123");
-//
-//        Role role = new Role();
-//        role.setRole("admin");
-//
-//        HashSet<Role> roles = new HashSet<>();
-//
-//        roles.add(role);
-//
-//        adminAccount.setRoles(roles);
-//
-//        accountService.saveAccount(adminAccount);
+        Account adminAccount = new Account();
+        adminAccount.setUsername("admin");
+        adminAccount.setPassword("qwe123");
+
+        Role role = new Role();
+        role.setRole("admin");
+
+        HashSet<Role> roles = new HashSet<>();
+
+        roles.add(role);
+
+        adminAccount.setRoles(roles);
+
+        accountService.saveAccount(adminAccount);
     }
 }

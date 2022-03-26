@@ -7,6 +7,7 @@ function EditGameList() {
     const [gameList, setGameList] = useState([]);
     const [seasons, setSeasons] = useState([]);
     const [season, setSeason] = useState({});
+    const [deleteButton, setDeleteButton] = useState(false);
 
     useEffect(() => {
         loadSeasons();
@@ -55,6 +56,9 @@ function EditGameList() {
     }
 
     function sortResultsByDate(resultList) {
+        if(resultList.length === 0) {
+            setDeleteButton(true);
+        }
         let ordered = resultList.sort(function(result1, result2) {
             let date1 = result1.date;
             let date2 = result2.date;
@@ -74,6 +78,20 @@ function EditGameList() {
             return dateTime.split("T")[0] + " " + dateTime.split("T")[1].split(".")[0];
         }
         return null;
+    }
+
+    function deleteSeason(event) {
+        event.preventDefault();
+        API.deleteSeason(season.id)
+            .then((res) => {
+                return res.data;
+            })
+            .then((season) => {
+                setSeason({});
+                setDeleteButton(false);
+                loadSeasons();
+            })
+            .catch((error) => console.log(error))
     }
 
 
@@ -117,6 +135,7 @@ function EditGameList() {
                     </tbody>
                 </table>
             )}
+            {deleteButton === true && <button onClick={deleteSeason}> Delete Season </button>}
         </div>
     )
 }

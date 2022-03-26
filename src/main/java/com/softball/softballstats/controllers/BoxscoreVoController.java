@@ -74,7 +74,12 @@ public class BoxscoreVoController {
         List<Player> playerList = boxscoreVO.getPlayerList();
         List<Game> gameList = boxscoreVO.getGameList();
         Result result = boxscoreVO.getResult();
-        result.setGamesList(gameList);
+
+        Result originalResult = resultService.findResultById(result.getId()).get();
+        originalResult.setGamesList(gameList);
+        originalResult.setResult(result.getResult());
+        originalResult.setDate(result.getDate());
+        originalResult.setScore(result.getScore());
 
         Season updateSeason = seasonService.findSeasonById(seasonId).get();
         List<Result> originalResultList = updateSeason.getResultList();
@@ -84,7 +89,8 @@ public class BoxscoreVoController {
                 resultIdx = i;
             }
         }
-        originalResultList.set(resultIdx, result);
+        originalResultList.set(resultIdx, originalResult);
+
         updateSeason.setResultList(originalResultList);
 
         List<Player> updatedPlayers = new ArrayList<>();
