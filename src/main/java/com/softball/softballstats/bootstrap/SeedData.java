@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import java.util.*;
 
 @Component
+@Profile("dev")
 public class SeedData implements ApplicationListener<ContextRefreshedEvent>{
 
     PlayerService playerService;
@@ -29,7 +30,6 @@ public class SeedData implements ApplicationListener<ContextRefreshedEvent>{
     }
 
     @Override
-    @Profile("dev")
     public void onApplicationEvent(ContextRefreshedEvent event) {
 
 //        Season season1 = new Season();
