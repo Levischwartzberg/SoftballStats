@@ -30,6 +30,10 @@ export default {
     return axios.put("/api/player/", playerData, {headers: createAuthHeader()});
   },
 
+  deletePlayer: function(playerId) {
+    return axios.delete(`/api/player/${playerId}`, {headers: createAuthHeader()});
+  },
+
   getGamesByPlayer: function(playerId) {
     return axios.get(`/api/game/player/${playerId}`);
   },
@@ -50,6 +54,10 @@ export default {
     return axios.get(`/api/seasonStats/${playerId}`);
   },
 
+  getTeamStatsBySeason: function(seasonId) {
+    return axios.get(`/api/seasonStats/team/${seasonId}`);
+  },
+
   getAllSeasons: function() {
     return axios.get("/api/season/");
   },
@@ -64,6 +72,10 @@ export default {
 
   updateSeason: function(seasonData) {
     return axios.put("/api/season/", seasonData, {headers: createAuthHeader()});
+  },
+
+  deleteSeason: function(seasonId) {
+    return axios.delete(`/api/season/${seasonId}`, {headers: createAuthHeader()});
   },
 
   saveNewFromSingleGameBoxscore: function(boxscoreVO) {

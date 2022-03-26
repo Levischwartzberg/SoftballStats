@@ -16,6 +16,8 @@ function AddSeasonPopup(props) {
     function handleChange(event) {
 		const { name, value } = event.target;
 		setSeasonObj({ ...seasonObj, [name]: value });
+        console.log(value);
+        console.log("shite");
 	}
 
     function handleFormSubmit(event) {
@@ -47,7 +49,7 @@ function AddSeasonPopup(props) {
                     </label>
                     <label htmlFor="session">
                         Session
-                        <select id = "dropdown" onClick={handleChange} name="session">
+                        <select id = "dropdown" onChange={handleChange} name="session">
                             <option value="" disabled="true">Choose 1</option>
                             <option value="Spring">Spring</option>
                             <option value="Summer">Summer</option>

@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom'
 function EditPlayerForm(props) {
     const [player, setPlayer] = useState({positionList: []});
     const [heightObj, setHeightObj] = useState({});
+    const [deletebutton, setDeleteButton] = useState(false);
 
     useEffect(() => {
         loadPlayer();
@@ -24,6 +25,9 @@ function EditPlayerForm(props) {
         API.getPlayerById(props.playerId)
             .then((res) => {
                 let player = res.data;
+                if(player.gameList.length === 0) {
+                    setDeleteButton(true);
+                }
                 player.gameList = [];
                 return player;
             })
@@ -63,6 +67,13 @@ function EditPlayerForm(props) {
             .then(() => redirect())
             .catch((err) => console.log(err));
         }
+    }
+
+    function deletePlayer(event) {
+        event.preventDefault();
+        API.deletePlayer(player.id)
+            .then(history.push("/players"))
+            .catch((error) => console.log(error));
     }
 
     return (
@@ -114,6 +125,7 @@ function EditPlayerForm(props) {
 				>
 					Save
 			</button>
+            {deletebutton === true && <button onClick={deletePlayer}>Delete</button>}
 
         </form>
     )
