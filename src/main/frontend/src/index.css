@@ -112,6 +112,13 @@ table {
 table th {
   border: var(--darkestGray) solid 1px;
   background-color: var(--darkGray);
+  text-align: center;
+  min-width: 40px;
+}
+
+table th.click-header:hover {
+  background-color: var(--darkestGray);
+  cursor: pointer;
 }
 
 table td {
