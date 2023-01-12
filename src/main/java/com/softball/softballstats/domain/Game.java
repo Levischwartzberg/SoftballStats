@@ -7,6 +7,8 @@ import lombok.Data;
 import org.springframework.data.relational.core.sql.In;
 
 import javax.persistence.*;
+import java.lang.reflect.Field;
+import java.util.Arrays;
 
 @Entity
 @Data
@@ -60,6 +62,13 @@ public class Game {
     private Result result;
 
     //region Helper Methods
+//    public boolean isDifferent(Game otherGame) {
+//        if(otherGame.getAtBats() != this.getAtBats() || otherGame.getHits() != this.getHits() || otherGame.getSingles() != this.getSingles() || otherGame.getDoubles() != this.getDoubles() || otherGame.getTriples() != this.getTriples() || otherGame.getHomeruns() != this.getHomeruns() || otherGame.getWalks() != this.getWalks() || otherGame.getRuns() != this.getRuns() || otherGame.getRbi() != this.getRbi()) {
+//            return true;
+//        }
+//        return false;
+//    }
+
     public static double calculateAVG(Integer hits, Integer atBats) {
         return (double) hits / (double) atBats;
     }

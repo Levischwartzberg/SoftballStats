@@ -36,7 +36,6 @@ public class SeasonStatsController {
         Map<Integer, SeasonStats> seasonStatsMap = new HashMap<>();
         for(Result result : season.getResultList()) {
             List<Game> gameList = result.getGamesList();
-            System.out.println("Games in Result " + gameList.size());
             for(Game game : gameList) {
                 Integer playerId = game.getPlayer().getId();
                 game.prepareObject();

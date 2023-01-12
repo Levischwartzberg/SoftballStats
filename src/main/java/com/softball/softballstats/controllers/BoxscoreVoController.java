@@ -38,7 +38,6 @@ public class BoxscoreVoController {
         List<Game> gameList = boxscoreVO.getGameList();
         Season season = boxscoreVO.getSeason();
         Result result = boxscoreVO.getResult();
-        System.out.println(result.getScore());
 
         result.setGamesList(gameList);
 
@@ -50,10 +49,8 @@ public class BoxscoreVoController {
         List<Player> updatedPlayers = new ArrayList<>();
 
         for(int i = 0; i < playerList.size(); i++) {
-            System.out.println("i: " + i );
             if(!(playerList.get(i).getId() == null)) {
                 Player updatePlayer = playerService.findPlayerById(playerList.get(i).getId()).get();
-                System.out.println("current player: " + updatePlayer.getLastName());
                 List<Game> originalGameList = updatePlayer.getGameList();
                 Game game = gameList.get(i);
                 game.prepareObject();
@@ -93,9 +90,9 @@ public class BoxscoreVoController {
 
         updateSeason.setResultList(originalResultList);
 
-        List<Player> updatedPlayers = new ArrayList<>();
+        List<Player> updatePlayerList = new ArrayList<>();
 
-        for(int i = 0; i < playerList.size(); i++) {
+        for(int i = 0; i < gameList.size(); i++) {
             if(!(playerList.get(i).getId() == null)) {
                 Player updatePlayer = playerService.findPlayerById(playerList.get(i).getId()).get();
 
@@ -104,21 +101,14 @@ public class BoxscoreVoController {
                 Game game = gameList.get(i);
                 game.prepareObject();
 
-                int index = 0;
-
-                for(int j = 0; j < originalGameList.size(); j++ ) {
-                    if(originalGameList.get(j).getGameId() == game.getGameId()) {
-                        index = j;
-                    }
-                }
-
+                int index = getGameIndex(originalGameList, game.getGameId());
                 originalGameList.set(index, game);
-
                 updatePlayer.setGameList(originalGameList);
-                updatedPlayers.add(updatePlayer);
+
+                updatePlayerList.add(updatePlayer);
             }
         }
-        for(Player player : updatedPlayers) {
+        for(Player player : updatePlayerList) {
             playerService.updatePlayer(player);
         }
         seasonService.updateSeason(updateSeason);
@@ -162,4 +152,31 @@ public class BoxscoreVoController {
         }
         seasonService.saveSeason(updateSeason);
     }
+
+    //region Custom Methods
+    private Integer getGameIndex(List<Game> gameList, Integer id) {
+        int start = 0;
+        int end = gameList.size() - 1;
+        int mid = (start + end) / 2;
+        int val = gameList.get(mid).getGameId();
+        if (val == id) {
+            return mid;
+        }
+        while(val != id) {
+            val = gameList.get(mid).getGameId();
+            if(val > id) {
+                end = mid - 1;
+                mid = (start + end) / 2;
+            }
+            else if(val < id) {
+                start = mid + 1;
+                mid = (start + end) / 2;
+            }
+            else {
+                return mid;
+            }
+        }
+        return -1;
+    }
+    //endregion
 }
